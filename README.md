@@ -18,4 +18,10 @@ application of good use.
 together.
 - I see this as something that can bring a good laugh and entertainment to others.
 
- 
+### User Stories
+
+- As a user, I would like to be able to select a story template from a few
+available options.
+- As a user, I would like to be able to answer the prompts that correspond to my chosen template.
+- As a user, I would like to be able to add my answers to the prompts into the full story.
+- As a user, I would like to be able to read the complete story.
