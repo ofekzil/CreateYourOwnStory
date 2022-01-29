@@ -37,11 +37,6 @@ public class StoryTest {
 
     @BeforeEach
     void setup() {
-        story1 = new Story(skeleton1, prompts1, locations1);
-        story2 = new Story(skeleton2, prompts2, locations2);
-        story3 = new Story(skeleton3, prompts3, locations3);
-        story4 = new Story(skeleton4, prompts4, locations4);
-
         skeleton1 = new ArrayList<String>();
         skeleton1.addAll(Arrays.asList("This is my character, ", ", who is smart."));
         prompts1 = new ArrayList<Prompt>();
@@ -76,6 +71,11 @@ public class StoryTest {
         prompts4.addAll(Arrays.asList(p2a, p2b, p2c));
         locations4 = new ArrayList<Integer>();
         locations4.addAll(Arrays.asList(0, 1, 0, 2, 1, 0));
+
+        story1 = new Story(skeleton1, prompts1, locations1);
+        story2 = new Story(skeleton2, prompts2, locations2);
+        story3 = new Story(skeleton3, prompts3, locations3);
+        story4 = new Story(skeleton4, prompts4, locations4);
     }
 
     @Test
@@ -154,9 +154,11 @@ public class StoryTest {
         assertEquals("This is my character, John Doe, who is smart." ,story1.createStory());
         assertEquals("I like to eat pizza while John Doe thinks it is mandatory you do homework for " +
                 "CPSC 210 before anything else.", story2.createStory());
+        story3.setPromptsInOrder();
         assertEquals("My character's name is John Doe. John Doe likes to eat pasta. " +
                 "John Doe also likes to sleep.", story3.createStory());
-        assertEquals("Here's a name John Doe. and a food pizza and the name again John Doe " +
+        story4.setPromptsInOrder();
+        assertEquals("Here's a name John Doe and a food pizza and the name again John Doe " +
                 "and a course CPSC 210 and a food again, pizza and the name John Doe, end.", story4.createStory());
     }
 
@@ -170,7 +172,7 @@ public class StoryTest {
         prompts1.add(name);
 
         prompts2.clear();
-        prompts2.addAll(Arrays.asList(name, food, course));
+        prompts2.addAll(Arrays.asList(food, name, course));
 
         prompts3.clear();
         prompts3.add(name);
