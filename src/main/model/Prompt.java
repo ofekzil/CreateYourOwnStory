@@ -4,7 +4,7 @@ package model;
 public class Prompt {
 
     // EFFECTS: constructs a prompt with given string
-    public Prompt(String p) {}
+    public Prompt(String prompt) {}
 
     // MODIFIES: this
     // EFFECTS: replaces the prompt with the appropriate answer

@@ -7,6 +7,7 @@ import java.util.List;
 // and a list of integers representing the locations of each prompt in the story
 public class Story {
 
+    // REQUIRES: no duplicate prompts
     // EFFECTS: constructs a Story with a skeleton, prompts, and locations
     public Story(List<String> skeleton, List<Prompt> prompts, List<Integer> locations){}
 
@@ -16,7 +17,7 @@ public class Story {
     public void setPromptsInOrder() {}
 
     // REQUIRES: all prompts have been turned into answers
-    // AND prompts.size + 1 = skeleton.size() AND no list is empty
+    // AND prompts.size + 1 = skeleton.size AND no list is empty
     // EFFECTS: appends story skeleton and prompt answers in appropriate order,
     // producing the full story
     public String createStory() {
