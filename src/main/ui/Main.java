@@ -1,13 +1,10 @@
 package ui;
 
-import java.util.ArrayList;
-import java.util.List;
 
-import model.Story;
-import model.Prompt;
+import java.io.FileNotFoundException;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         new StoryApp();
     }
 }
