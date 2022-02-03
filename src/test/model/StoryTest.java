@@ -157,29 +157,33 @@ public class StoryTest {
     @Test
     void testBreakLinesMinLength() {
         setAnswers();
+        story1.setPromptsInOrder();
         String s1 = story1.createStory();
         assertEquals(s1, story1.breakLines(s1));
     }
 
     @Test
-    void testBreakLinesBreakSpace() {
+    void testBreakLinesMidWord() {
         setAnswers();
+        story2.setPromptsInOrder();
         String s2 = story2.createStory();
-        assertEquals("I like to eat pizza while John Doe thinks it is mandatory you do \nhomework for " +
-                "CPSC 210 before anything else.", story2.breakLines(s2));
+        assertEquals("I like to eat pizza while John Doe thinks it is ma-\nndatory you do homework for CPSC "
+                + "210 before anythi-\nng else.", story2.breakLines(s2));
     }
 
     @Test
-    void testBreakLinesBreakMidWord() {
+    void testBreakLinesSpace() {
         setAnswers();
+        story3.setPromptsInOrder();
         String s3 = story3.createStory();
-        assertEquals("My character's name is John Doe. John Doe likes t-\no eat pasta. " +
+        assertEquals("My character's name is John Doe. John Doe likes to\n eat pasta. " +
                 "John Doe also likes to sleep.", story3.breakLines(s3));
     }
 
     @Test
     void testBreakLinesMultipleBreaks() {
         setAnswers();
+        story4.setPromptsInOrder();
         String s4 = story4.createStory();
         assertEquals("Here's a name John Doe and a food pizza and the na-\nme again John Doe " +
                 "and a course CPSC 210 and a food\n again, pizza and the name John Doe, end.", story4.breakLines(s4));

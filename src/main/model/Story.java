@@ -60,7 +60,19 @@ public class Story {
     // REQUIRES: str is a COMPLETE story AND str.length >= 50
     // EFFECTS: adds line breaks to a complete story
     public String breakLines(String str) {
-        return "";
+        String broken = "";
+        for (int i = 0; i < str.length(); i += 50) {
+            if (i >= str.length() - 50) {
+                broken += str.substring(i);
+            } else {
+                if (str.substring(i + 50, i + 51).equals(" ")) {
+                    broken += str.substring(i, i + 50) + "\n";
+                } else {
+                    broken += str.substring(i, i + 50) + "-\n";
+                }
+            }
+        }
+        return broken;
     }
 
     // getters
