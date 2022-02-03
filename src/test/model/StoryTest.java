@@ -8,14 +8,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-// TODO: create remaining example. Could perhaps not have everything in the BeforeEach, but have each one in its
-//  appropriate method. If so, might have to create different methods for different cases of the same method.
-//  mainly thinking of setPromptsInOrder. The different cases for it could be base case
-//  (skeleton size 2, prompts size 1), more prompts that each go in a unique place (in order),
-//  one where there's only one prompt that goes in multiple locations, and a mix of all. Could also perhaps create a
-//  list of skeletons, prompts, locations and stories, so that in each test case I will get only the one that's
-//  necessary. Or just have a general field for each and construct it within each separate test.
-
 public class StoryTest {
 
     private Story story1;
@@ -38,7 +30,7 @@ public class StoryTest {
     @BeforeEach
     void setup() {
         skeleton1 = new ArrayList<String>();
-        skeleton1.addAll(Arrays.asList("This is my character, ", ", who is smart."));
+        skeleton1.addAll(Arrays.asList("This is my character, ", ", who is very smart."));
         prompts1 = new ArrayList<Prompt>();
         Prompt p1 = new Prompt("Choose a character name");
         prompts1.add(p1);
@@ -81,7 +73,7 @@ public class StoryTest {
     @Test
     void testConstructor() {
         assertEquals("This is my character, ", story1.getSkeleton().get(0));
-        assertEquals(", who is smart.", story1.getSkeleton().get(1));
+        assertEquals(", who is very smart.", story1.getSkeleton().get(1));
         assertEquals("Choose a character name", story1.getPrompts().get(0).getPrompt());
         assertEquals(0, story1.getLocations().get(0));
 
@@ -151,7 +143,7 @@ public class StoryTest {
     @Test
     void testCreateStory() {
         setAnswers();
-        assertEquals("This is my character, John Doe, who is smart." ,story1.createStory());
+        assertEquals("This is my character, John Doe, who is very smart." ,story1.createStory());
         assertEquals("I like to eat pizza while John Doe thinks it is mandatory you do homework for " +
                 "CPSC 210 before anything else.", story2.createStory());
         story3.setPromptsInOrder();
@@ -160,6 +152,37 @@ public class StoryTest {
         story4.setPromptsInOrder();
         assertEquals("Here's a name John Doe and a food pizza and the name again John Doe " +
                 "and a course CPSC 210 and a food again, pizza and the name John Doe, end.", story4.createStory());
+    }
+
+    @Test
+    void testBreakLinesMinLength() {
+        setAnswers();
+        String s1 = story1.createStory();
+        assertEquals(s1, story1.breakLines(s1));
+    }
+
+    @Test
+    void testBreakLinesBreakSpace() {
+        setAnswers();
+        String s2 = story2.createStory();
+        assertEquals("I like to eat pizza while John Doe thinks it is mandatory you do \nhomework for " +
+                "CPSC 210 before anything else.", story2.breakLines(s2));
+    }
+
+    @Test
+    void testBreakLinesBreakMidWord() {
+        setAnswers();
+        String s3 = story3.createStory();
+        assertEquals("My character's name is John Doe. John Doe likes t-\no eat pasta. " +
+                "John Doe also likes to sleep.", story3.breakLines(s3));
+    }
+
+    @Test
+    void testBreakLinesMultipleBreaks() {
+        setAnswers();
+        String s4 = story4.createStory();
+        assertEquals("Here's a name John Doe and a food pizza and the na-\nme again John Doe " +
+                "and a course CPSC 210 and a food\n again, pizza and the name John Doe, end.", story4.breakLines(s4));
     }
 
     // EFFECTS: changes prompts to answers

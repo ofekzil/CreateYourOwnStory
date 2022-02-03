@@ -10,6 +10,7 @@ import java.util.Scanner;
 import model.Prompt;
 import model.Story;
 
+// along with user input, this class writes the story accordingly
 public class StoryApp {
 
     public static final List<String> TEMPLATES = new ArrayList<>();
@@ -17,7 +18,7 @@ public class StoryApp {
     private Scanner user;
     private Story story;
 
-    // EFFECTS: sets up list of stories and runs the app
+    // EFFECTS: sets up list of story file names and runs the app
     public StoryApp() throws FileNotFoundException {
         TEMPLATES.addAll(Arrays.asList("data/CrazyMorningMale.txt", "data/KingdomMale.txt",
                 "data/CrazyMorningFemale.txt", "data/KingdomFemale.txt"));
@@ -33,7 +34,7 @@ public class StoryApp {
         int template = user.nextInt();
         user.nextLine();
         System.out.println("Please type either \"male\" or \"female\" (no quotes) in order to choose your desired "
-                + "template for your protagonist. You will then be presented with a series of prompts to fill out, "
+                + "template for your protagonist. \nYou will then be presented with a series of prompts to fill out, "
                 + "which will complete the story accordingly.");
         String chosenTemplate = user.nextLine();
         if (chosenTemplate.equalsIgnoreCase("male")) {
@@ -46,6 +47,10 @@ public class StoryApp {
         user.close();
     }
 
+    // REQUIRES: file must have the text in the following order: first all prompts (each on new line),
+    // then all locations (as ints in a single line), then the rest of the skeleton with line breaks every time a prop
+    // needs to be inserted
+    // MODIFIES: this
     // EFFECTS: read story from txt file and sort information into appropriate lists
     private void readFile(String name) throws FileNotFoundException {
         File file = new File(name);

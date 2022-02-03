@@ -57,6 +57,12 @@ public class Story {
         return complete;
     }
 
+    // REQUIRES: str is a COMPLETE story AND str.length >= 50
+    // EFFECTS: adds line breaks to a complete story
+    public String breakLines(String str) {
+        return "";
+    }
+
     // getters
 
     public List<String> getSkeleton() {
