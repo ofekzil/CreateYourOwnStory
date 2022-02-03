@@ -96,7 +96,8 @@ public class StoryApp {
         }
         story.setPromptsInOrder();
         String fullStory = story.createStory();
-        System.out.println(fullStory);
+        String brokenStory = story.breakLines(fullStory);
+        System.out.println(brokenStory);
         user.close();
     }
 }
