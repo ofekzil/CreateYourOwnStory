@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+// Unit tests for Prompt class
 public class PromptTest {
 
     private Prompt testPrompt;

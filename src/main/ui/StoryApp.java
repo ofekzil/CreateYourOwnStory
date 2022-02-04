@@ -14,6 +14,7 @@ import model.Story;
 public class StoryApp {
 
     public static final List<String> TEMPLATES = new ArrayList<>();
+    public static final List<String> TEMPLATE_NAMES = new ArrayList<>();
 
     private Scanner user;
     private Story story;
@@ -22,27 +23,50 @@ public class StoryApp {
     public StoryApp() throws FileNotFoundException {
         TEMPLATES.addAll(Arrays.asList("data/CrazyMorningMale.txt", "data/KingdomMale.txt",
                 "data/CrazyMorningFemale.txt", "data/KingdomFemale.txt"));
+        TEMPLATE_NAMES.addAll(Arrays.asList("Crazy Morning", "In the Kingdom"));
 
         chooseStory();
     }
 
-    // EFFECTS: chooses story template and male/female story based on user input
+    // EFFECTS: chooses story template based on user input
     public void chooseStory() throws FileNotFoundException {
         user = new Scanner(System.in);
+        String names = TEMPLATE_NAMES.toString().replace("[", "").replace("]", "");
         System.out.println("Welcome! Please select a story template and type the number. Options are 1 through "
-                + TEMPLATES.size() / 2 + " (please type a number, e.g. 1)");
-        int template = user.nextInt();
-        user.nextLine();
+                + TEMPLATES.size() / 2 + ",\nwhich correspond to the following templates: " + names
+                + ". (please type a number, e.g. 1)");
+
+        while (true) {
+            int template = user.nextInt();
+            if (template >= 1 && template <= TEMPLATES.size()) {
+                user.nextLine();
+                chooseMaleOrFemale(template);
+                break;
+            } else {
+                System.out.println("Please enter appropriate input.");
+            }
+        }
+        user.close();
+    }
+
+    // EFFECTS: chooses male/female template based on story input
+    public void chooseMaleOrFemale(int template) throws FileNotFoundException {
         System.out.println("Please type either \"male\" or \"female\" (no quotes) in order to choose your desired "
                 + "template for your protagonist. \nYou will then be presented with a series of prompts to fill out, "
                 + "which will complete the story accordingly.");
-        String chosenTemplate = user.nextLine();
-        if (chosenTemplate.equalsIgnoreCase("male")) {
-            readFile(TEMPLATES.get(template - 1));
-        } else if (chosenTemplate.equalsIgnoreCase("female")) {
-            readFile(TEMPLATES.get((TEMPLATES.size() / 2) + (template - 1)));
-        } else {
-            System.out.println("Please enter appropriate input.");
+
+        user = new Scanner(System.in);
+        while (true) {
+            String chosenTemplate = user.nextLine();
+            if (chosenTemplate.equalsIgnoreCase("male")) {
+                readFile(TEMPLATES.get(template - 1));
+                break;
+            } else if (chosenTemplate.equalsIgnoreCase("female")) {
+                readFile(TEMPLATES.get((TEMPLATES.size() / 2) + (template - 1)));
+                break;
+            } else {
+                System.out.println("Please enter appropriate input.");
+            }
         }
         user.close();
     }

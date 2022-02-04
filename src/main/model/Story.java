@@ -57,7 +57,8 @@ public class Story {
         return complete;
     }
 
-    // REQUIRES: str is a COMPLETE story AND str.length >= 50
+    // REQUIRES: str is a COMPLETE story
+    // MODIFIES: str
     // EFFECTS: adds line breaks to a complete story
     public String breakLines(String str) {
         String broken = "";
