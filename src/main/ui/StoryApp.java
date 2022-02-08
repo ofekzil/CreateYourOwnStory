@@ -19,6 +19,8 @@ public class StoryApp {
     private Scanner user;
     private Story story;
 
+    // REQUIRES: the strings in TEMPLATES have to be in order of all male stories first,
+    // then all female stories in teh same order
     // EFFECTS: sets up list of story file names and runs the app
     public StoryApp() throws FileNotFoundException {
         TEMPLATES.addAll(Arrays.asList("data/CrazyMorningMale.txt", "data/KingdomMale.txt",
@@ -38,7 +40,7 @@ public class StoryApp {
 
         while (true) {
             int template = user.nextInt();
-            if (template >= 1 && template <= TEMPLATES.size()) {
+            if (template >= 1 && template <= TEMPLATES.size() / 2) {
                 user.nextLine();
                 chooseMaleOrFemale(template);
                 break;
@@ -99,15 +101,6 @@ public class StoryApp {
         makeStory();
     }
 
-    // EFFECTS: turns list of strings from file into prompts
-    private List<Prompt> turnToPrompts(List<String> los) {
-        List<Prompt> result = new ArrayList<>();
-        for (String s : los) {
-            Prompt p = new Prompt(s);
-            result.add(p);
-        }
-        return result;
-    }
 
     // EFFECTS: prints the prompts and collects the user's answers, then print the finished story
     public void makeStory() {
@@ -123,5 +116,15 @@ public class StoryApp {
         String brokenStory = story.breakLines(fullStory);
         System.out.println(brokenStory);
         user.close();
+    }
+
+    // EFFECTS: turns list of strings from file into prompts
+    private List<Prompt> turnToPrompts(List<String> los) {
+        List<Prompt> result = new ArrayList<>();
+        for (String s : los) {
+            Prompt p = new Prompt(s);
+            result.add(p);
+        }
+        return result;
     }
 }

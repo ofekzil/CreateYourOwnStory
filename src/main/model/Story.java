@@ -66,7 +66,7 @@ public class Story {
             if (i >= str.length() - 50) {
                 broken += str.substring(i);
             } else {
-                if (str.substring(i + 50, i + 51).equals(" ")) {
+                if (str.charAt(i + 50) == ' ') { //|| str.charAt(i + 50) == ',' || str.charAt(i + 50) == '.'
                     broken += str.substring(i, i + 50) + "\n";
                 } else {
                     broken += str.substring(i, i + 50) + "-\n";
