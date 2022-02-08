@@ -109,9 +109,9 @@ public class StoryApp {
         for (Prompt p : prompts) {
             System.out.println(p.getPrompt());
             String answer = user.nextLine();
-            p.changePromptToAnswer(answer);
+            story.addAnswer(answer);
         }
-        story.setPromptsInOrder();
+        story.setAnswersInOrder();
         String fullStory = story.createStory();
         String brokenStory = story.breakLines(fullStory);
         System.out.println(brokenStory);

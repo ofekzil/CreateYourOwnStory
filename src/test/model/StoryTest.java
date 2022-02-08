@@ -77,6 +77,7 @@ public class StoryTest {
         assertEquals(", who is very smart.", story1.getSkeleton().get(1));
         assertEquals("Choose a character name", story1.getPrompts().get(0).getPrompt());
         assertEquals(0, story1.getLocations().get(0));
+        assertTrue(story1.getAnswers().isEmpty());
 
         assertEquals("I like to eat ", story2.getSkeleton().get(0));
         assertEquals(" while ", story2.getSkeleton().get(1));
@@ -88,57 +89,67 @@ public class StoryTest {
         assertEquals(0, story2.getLocations().get(0));
         assertEquals(1, story2.getLocations().get(1));
         assertEquals(2, story2.getLocations().get(2));
+        assertTrue(story2.getAnswers().isEmpty());
     }
 
     @Test
-    void testSetPromptsInOrderAllInOrder() {
+    void testAddAnswer() {
+        story2.addAnswer("pizza");
+        assertEquals("pizza", story2.getAnswers().get(0).getAnswer());
+        story2.addAnswer("John Doe");
+        assertEquals("John Doe", story2.getAnswers().get(1).getAnswer());
+    }
+
+    @Test
+    void testSetAnswersInOrderAllInOrder() {
         setAnswers();
-        story1.setPromptsInOrder();
-        checkAnswers(prompts1, locations1);
+        story1.setAnswersInOrder();
+        checkAnswers(story1.getAnswers(), locations1);
 
-        story2.setPromptsInOrder();
-        checkAnswers(prompts2, locations2);
+        story2.setAnswersInOrder();
+        checkAnswers(story2.getAnswers(), locations2);
     }
 
     @Test
-    void testSetPromptsInOrderOnePromptFewPlaces() {
+    void testSetAnswersInOrderOnePromptFewPlaces() {
         setAnswers();
-        story3.setPromptsInOrder();
-        assertEquals(3, story3.getPrompts().size());
-        assertEquals("John Doe", story3.getPrompts().get(0).getPrompt());
-        assertEquals("John Doe", story3.getPrompts().get(1).getPrompt());
-        assertEquals("John Doe", story3.getPrompts().get(2).getPrompt());
+        story3.setAnswersInOrder();
+        assertEquals(3, story3.getAnswers().size());
+        assertEquals("John Doe", story3.getAnswers().get(0).getAnswer());
+        assertEquals("John Doe", story3.getAnswers().get(1).getAnswer());
+        assertEquals("John Doe", story3.getAnswers().get(2).getAnswer());
     }
 
     @Test
-    void testSetPromptInOrderOnePromptAnother() {
-        Prompt answer = new Prompt("pizza");
+    void testSetAnswersInOrderOnePromptAnother() {
+        Prompt p = new Prompt("Name a food");
         List<String> skel = new ArrayList<String>();
         skel.addAll(Arrays.asList("Sentence ", " another sentence ", " yet another ", " one more ", " finally."));
         List<Prompt> lop = new ArrayList<Prompt>();
-        lop.add(answer);
+        lop.add(p);
         List<Integer> loi = new ArrayList<>(Arrays.asList(0, 0, 0, 0));
         Story st = new Story(skel, lop, loi);
+        st.addAnswer("pizza");
 
-        st.setPromptsInOrder();
-        assertEquals(4, st.getPrompts().size());
-        assertEquals("pizza", st.getPrompts().get(0).getPrompt());
-        assertEquals("pizza", st.getPrompts().get(1).getPrompt());
-        assertEquals("pizza", st.getPrompts().get(2).getPrompt());
-        assertEquals("pizza", st.getPrompts().get(3).getPrompt());
+        st.setAnswersInOrder();
+        assertEquals(4, st.getAnswers().size());
+        assertEquals("pizza", st.getAnswers().get(0).getAnswer());
+        assertEquals("pizza", st.getAnswers().get(1).getAnswer());
+        assertEquals("pizza", st.getAnswers().get(2).getAnswer());
+        assertEquals("pizza", st.getAnswers().get(3).getAnswer());
     }
 
     @Test
-    void testSetPromptsInOrderMix() {
+    void testSetAnswersInOrderMix() {
         setAnswers();
-        story4.setPromptsInOrder();
-        assertEquals(6, story4.getPrompts().size());
-        assertEquals("John Doe", story4.getPrompts().get(0).getPrompt());
-        assertEquals("pizza", story4.getPrompts().get(1).getPrompt());
-        assertEquals("John Doe", story4.getPrompts().get(2).getPrompt());
-        assertEquals("CPSC 210", story4.getPrompts().get(3).getPrompt());
-        assertEquals("pizza", story4.getPrompts().get(4).getPrompt());
-        assertEquals("John Doe", story4.getPrompts().get(5).getPrompt());
+        story4.setAnswersInOrder();
+        assertEquals(6, story4.getAnswers().size());
+        assertEquals("John Doe", story4.getAnswers().get(0).getAnswer());
+        assertEquals("pizza", story4.getAnswers().get(1).getAnswer());
+        assertEquals("John Doe", story4.getAnswers().get(2).getAnswer());
+        assertEquals("CPSC 210", story4.getAnswers().get(3).getAnswer());
+        assertEquals("pizza", story4.getAnswers().get(4).getAnswer());
+        assertEquals("John Doe", story4.getAnswers().get(5).getAnswer());
     }
 
     @Test
@@ -147,10 +158,10 @@ public class StoryTest {
         assertEquals("This is my character, John Doe, who is very smart." ,story1.createStory());
         assertEquals("I like to eat pizza while John Doe thinks it is mandatory you do homework for " +
                 "CPSC 210 before anything else.", story2.createStory());
-        story3.setPromptsInOrder();
+        story3.setAnswersInOrder();
         assertEquals("My character's name is John Doe. John Doe likes to eat pasta. " +
                 "John Doe also likes to sleep.", story3.createStory());
-        story4.setPromptsInOrder();
+        story4.setAnswersInOrder();
         assertEquals("Here's a name John Doe and a food pizza and the name again John Doe " +
                 "and a course CPSC 210 and a food again, pizza and the name John Doe, end.", story4.createStory());
     }
@@ -158,7 +169,7 @@ public class StoryTest {
     @Test
     void testBreakLinesMinLength() {
         setAnswers();
-        story1.setPromptsInOrder();
+        story1.setAnswersInOrder();
         String s1 = story1.createStory();
         assertEquals(s1, story1.breakLines(s1));
     }
@@ -166,7 +177,7 @@ public class StoryTest {
     @Test
     void testBreakLinesMidWord() {
         setAnswers();
-        story2.setPromptsInOrder();
+        story2.setAnswersInOrder();
         String s2 = story2.createStory();
         assertEquals("I like to eat pizza while John Doe thinks it is ma-\nndatory you do homework for CPSC "
                 + "210 before anythi-\nng else.", story2.breakLines(s2));
@@ -175,7 +186,7 @@ public class StoryTest {
     @Test
     void testBreakLinesSpace() {
         setAnswers();
-        story3.setPromptsInOrder();
+        story3.setAnswersInOrder();
         String s3 = story3.createStory();
         assertEquals("My character's name is John Doe. John Doe likes to\n eat pasta. " +
                 "John Doe also likes to sleep.", story3.breakLines(s3));
@@ -184,7 +195,7 @@ public class StoryTest {
     @Test
     void testBreakLinesMultipleBreaks() {
         setAnswers();
-        story4.setPromptsInOrder();
+        story4.setAnswersInOrder();
         String s4 = story4.createStory();
         assertEquals("Here's a name John Doe and a food pizza and the na-\nme again John Doe " +
                 "and a course CPSC 210 and a food\n again, pizza and the name John Doe, end.", story4.breakLines(s4));
@@ -192,28 +203,28 @@ public class StoryTest {
 
     // EFFECTS: changes prompts to answers
     void setAnswers() {
-        Prompt name = new Prompt("John Doe");
-        Prompt food = new Prompt("pizza");
-        Prompt course = new Prompt("CPSC 210");
+        String name = "John Doe";
+        String food = "pizza";
+        String course = "CPSC 210";
 
-        prompts1.clear();
-        prompts1.add(name);
+        story1.addAnswer(name);
 
-        prompts2.clear();
-        prompts2.addAll(Arrays.asList(food, name, course));
+        story2.addAnswer(food);
+        story2.addAnswer(name);
+        story2.addAnswer(course);
 
-        prompts3.clear();
-        prompts3.add(name);
+        story3.addAnswer(name);
 
-        prompts4.clear();
-        prompts4.addAll(Arrays.asList(name, food, course));
+        story4.addAnswer(name);
+        story4.addAnswer(food);
+        story4.addAnswer(course);
     }
 
     // EFFECTS: checks that each prompt corresponds to the location in order
-    void checkAnswers(List<Prompt> prompts, List<Integer> locations) {
-        for (int i = 0; i < prompts.size(); i++) {
-            Prompt expect = prompts.get(i);
-            Prompt actual = prompts.get(locations.get(i));
+    void checkAnswers(List<Answer> answers, List<Integer> locations) {
+        for (int i = 0; i < answers.size(); i++) {
+            Answer expect = answers.get(i);
+            Answer actual = answers.get(locations.get(i));
             assertEquals(expect, actual);
         }
     }

@@ -11,6 +11,7 @@ public class Story {
     private List<String> skeleton;
     private List<Prompt> prompts;
     private List<Integer> locations;
+    private List<Answer> answers;
 
     // REQUIRES: no duplicate prompts AND locations.size + 1 = skeleton.size
     // EFFECTS: constructs a Story with a skeleton, prompts, and locations
@@ -18,40 +19,48 @@ public class Story {
         this.skeleton = skeleton;
         this.prompts = prompts;
         this.locations = locations;
+        answers = new ArrayList<>();
     }
 
-    // REQUIRES: all prompts have been turned into answers
+    // MODIFIES: this
+    // EFFECTS: turns given string into answer and adds to end of answers
+    public void addAnswer(String str) {
+        Answer a = new Answer(str);
+        answers.add(a);
+    }
+
+    // REQUIRES: all prompts have been answered
     // MODIFIES: this
     // EFFECTS: sets the answers in the appropriate order according to locations
-    public void setPromptsInOrder() {
+    public void setAnswersInOrder() {
         int originalSize = prompts.size();
-        List<Prompt> answers = new ArrayList<Prompt>();
+        List<Answer> inOrder = new ArrayList<>();
         for (int i = 0; i < locations.size(); i++) {
             int location = locations.get(i);
             if (i != location) {
                 if (i >= originalSize) {
-                    answers.add(prompts.get(location));
+                    inOrder.add(answers.get(location));
                 } else {
-                    answers.add(i, prompts.get(location));
+                    inOrder.add(i, answers.get(location));
                 }
             } else {
-                answers.add(prompts.get(i));
+                inOrder.add(answers.get(i));
             }
         }
-        prompts = answers;
+        this.answers = inOrder;
     }
 
-    // REQUIRES: all prompts have been turned into answers
+    // REQUIRES: all prompts have been answered AND are in proper order according to locations
     // AND prompts.size + 1 = skeleton.size AND no list is empty
     // EFFECTS: appends story skeleton and prompt answers in appropriate order,
     // producing the full story
     public String createStory() {
         String complete = "";
         for (int i = 0; i < skeleton.size(); i++) {
-            if (i >= prompts.size()) {
+            if (i >= answers.size()) {
                 complete += skeleton.get(i);
             } else {
-                complete += skeleton.get(i) + prompts.get(i).getPrompt();
+                complete += skeleton.get(i) + answers.get(i).getAnswer();
             }
         }
         return complete;
@@ -88,5 +97,9 @@ public class Story {
 
     public List<Integer> getLocations() {
         return locations;
+    }
+
+    public List<Answer> getAnswers() {
+        return answers;
     }
 }
