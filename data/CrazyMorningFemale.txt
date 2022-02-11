@@ -3,7 +3,7 @@ Name a musician/band
 Name a technological product
 Choose a company name
 Choose a number (type in words, e.g. seven, one)
-Name a verb (in presnt tense, e.g. walk, talk)
+Name a verb (in present tense, e.g. walk, talk)
 And another verb
 Name a musical instrument
 Name a fruit

@@ -201,7 +201,7 @@ public class StoryTest {
                 "and a course CPSC 210 and a food\n again, pizza and the name John Doe, end.", story4.breakLines(s4));
     }
 
-    // EFFECTS: changes prompts to answers
+    // EFFECTS: changes adds appropriate answers to each story
     void setAnswers() {
         String name = "John Doe";
         String food = "pizza";
@@ -220,7 +220,7 @@ public class StoryTest {
         story4.addAnswer(course);
     }
 
-    // EFFECTS: checks that each prompt corresponds to the location in order
+    // EFFECTS: checks that each answer corresponds to the location in order
     void checkAnswers(List<Answer> answers, List<Integer> locations) {
         for (int i = 0; i < answers.size(); i++) {
             Answer expect = answers.get(i);

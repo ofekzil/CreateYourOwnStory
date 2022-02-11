@@ -20,8 +20,9 @@ public class StoryApp {
     private Story story;
 
     // REQUIRES: the strings in TEMPLATES have to be in order of all male stories first,
-    // then all female stories in teh same order
-    // EFFECTS: sets up list of story file names and runs the app
+    // then all female stories in the same order, where the order of the stories is the same as TEMPLATE_NAMES
+    // MODIFIES: this
+    // EFFECTS: sets up list of story file names, a list of template options, and runs the app
     public StoryApp() throws FileNotFoundException {
         TEMPLATES.addAll(Arrays.asList("data/CrazyMorningMale.txt", "data/KingdomMale.txt",
                 "data/CrazyMorningFemale.txt", "data/KingdomFemale.txt"));
@@ -30,6 +31,7 @@ public class StoryApp {
         chooseStory();
     }
 
+    // MODIFIES: this
     // EFFECTS: chooses story template based on user input
     public void chooseStory() throws FileNotFoundException {
         user = new Scanner(System.in);
@@ -51,7 +53,8 @@ public class StoryApp {
         user.close();
     }
 
-    // EFFECTS: chooses male/female template based on story input
+    // MODIFIES: this
+    // EFFECTS: chooses male/female template based on user input
     public void chooseMaleOrFemale(int template) throws FileNotFoundException {
         System.out.println("Please type either \"male\" or \"female\" (no quotes) in order to choose your desired "
                 + "template for your protagonist. \nYou will then be presented with a series of prompts to fill out, "
@@ -78,7 +81,7 @@ public class StoryApp {
     // needs to be inserted
     // MODIFIES: this
     // EFFECTS: read story from txt file and sort information into appropriate lists
-    private void readFile(String name) throws FileNotFoundException {
+    public void readFile(String name) throws FileNotFoundException {
         File file = new File(name);
         Scanner sc = new Scanner(file);
         List<String> promptsString = new ArrayList<>();
@@ -102,7 +105,8 @@ public class StoryApp {
     }
 
 
-    // EFFECTS: prints the prompts and collects the user's answers, then print the finished story
+    // MODIFIES: this, fullStory
+    // EFFECTS: prints the prompts and collects the user's answers, then prints the finished story
     public void makeStory() {
         user = new Scanner(System.in);
         List<Prompt> prompts = story.getPrompts();

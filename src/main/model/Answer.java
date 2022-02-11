@@ -10,7 +10,7 @@ public class Answer {
         this.answer = answer;
     }
 
-    // EFFECTS: returns the answer
+    // getter
     public String getAnswer() {
         return answer;
     }
