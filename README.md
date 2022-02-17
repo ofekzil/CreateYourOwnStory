@@ -26,3 +26,6 @@ available options.
 - As a user, I would like to be able to answer the prompts that correspond to my chosen template.
 - As a user, I would like to be able to add my answers to the prompts into the full story.
 - As a user, I would like to be able to read the complete story.
+- As a user, I would like to be able to save the complete story (after answering all prompts).
+- As a user, I would like to be able to exit the app while answering the prompts, and then come back and continue 
+from where I was.
