@@ -10,6 +10,11 @@ import java.util.Scanner;
 import model.Prompt;
 import model.Story;
 
+// TODO: Add an option for quit in the for-loop in makeStory. If quit is selected, then remove the prompts already
+//  answered from the story (perhaps remove the prompt each time in the loop). Then save the story as it is with an
+//  all the answers answered so far. Also add an option at the beginning to allow the user to reload the previous
+//  story state.
+
 // along with user input, this class writes the story accordingly
 public class StoryApp {
 
@@ -24,13 +29,14 @@ public class StoryApp {
     // MODIFIES: this
     // EFFECTS: sets up list of story file names, a list of template options, and runs the app
     public StoryApp() throws FileNotFoundException {
-        TEMPLATES.addAll(Arrays.asList("data/CrazyMorningMale.txt", "data/KingdomMale.txt",
-                "data/CrazyMorningFemale.txt", "data/KingdomFemale.txt"));
+        TEMPLATES.addAll(Arrays.asList("data/templates/CrazyMorningMale.txt", "data/templates/KingdomMale.txt",
+                "data/templates/CrazyMorningFemale.txt", "data/templates/KingdomFemale.txt"));
         TEMPLATE_NAMES.addAll(Arrays.asList("Crazy Morning", "In the Kingdom"));
 
         chooseStory();
     }
 
+    // TODO: will add option for loading story, which will be represented from entering -1
     // MODIFIES: this
     // EFFECTS: chooses story template based on user input
     public void chooseStory() throws FileNotFoundException {
@@ -76,6 +82,7 @@ public class StoryApp {
         user.close();
     }
 
+    // TODO: will come from TemplateReader abstract class
     // REQUIRES: file must have the text in the following order: first all prompts (each on new line),
     // then all locations (as ints in a single line), then the rest of the skeleton with line breaks every time a prop
     // needs to be inserted
@@ -122,6 +129,7 @@ public class StoryApp {
         user.close();
     }
 
+    // TODO: will come from TemplateReader abstract class
     // EFFECTS: turns list of strings from file into prompts
     private List<Prompt> turnToPrompts(List<String> los) {
         List<Prompt> result = new ArrayList<>();

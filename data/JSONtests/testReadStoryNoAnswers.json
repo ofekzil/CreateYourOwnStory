@@ -1,0 +1,18 @@
+{
+    "name": "data/testTemplate",
+    "prompts": [
+      {
+        "prompt": "Choose a name"
+      },
+      {
+        "prompt": "Choose a food"
+      },
+      {
+        "prompt": "Choose a course"
+      },
+      {
+        "prompt": "Choose an animal"
+      }
+    ],
+    "answers": []
+}
