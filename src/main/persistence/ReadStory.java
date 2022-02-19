@@ -6,7 +6,7 @@ import ui.TemplateReader;
 
 import java.io.IOException;
 
-// Represents a class to read a story (i.e. the answered prompts) from file
+// Represents a class to read answers, prompts left and template name from file
 public class ReadStory extends TemplateReader {
 
     // EFFECTS: constructs a ReadStory object to read the file given as string
