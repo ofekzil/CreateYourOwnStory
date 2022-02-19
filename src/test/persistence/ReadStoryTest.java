@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -20,6 +21,8 @@ public class ReadStoryTest {
 
     @BeforeEach
     void setUp() {
+        promptsString = new ArrayList<>();
+        answersString = new ArrayList<>();
         promptsString.addAll(Arrays.asList("Choose a name", "Choose a food", "Choose a course", "Choose an animal"));
         answersString.addAll(Arrays.asList("John Doe", "pizza", "CPSC 210", "dog"));
     }
@@ -29,6 +32,7 @@ public class ReadStoryTest {
         try {
             reader = new ReadStory("data/JSONtests/nonExistentFile.json");
             Story str = reader.read();
+            fail("Expected IOException");
         } catch (IOException e) {
             // expected
         }
@@ -37,7 +41,7 @@ public class ReadStoryTest {
     @Test
     void testReadNoAnswers() {
         try {
-            reader = new ReadStory("data/JSONtests/testReadStoryNoAnswer");
+            reader = new ReadStory("data/JSONtests/testReadStoryNoAnswers.json");
             Story str = reader.read();
             checkSkeleton(str.getSkeleton());
             checkLocations(str.getLocations());
@@ -52,7 +56,7 @@ public class ReadStoryTest {
     @Test
     void testReadSomeAnswers() {
         try {
-            reader = new ReadStory("data/JSONtests/testReadStorySomeAnswer");
+            reader = new ReadStory("data/JSONtests/testReadStorySomeAnswers");
             Story str = reader.read();
             checkSkeleton(str.getSkeleton());
             checkLocations(str.getLocations());
@@ -67,7 +71,7 @@ public class ReadStoryTest {
     @Test
     void testReadAllAnswers() {
         try {
-            reader = new ReadStory("data/JSONtests/testReadStoryAllAnswer");
+            reader = new ReadStory("data/JSONtests/testReadStoryAllAnswers");
             Story str = reader.read();
             checkSkeleton(str.getSkeleton());
             checkLocations(str.getLocations());
@@ -82,12 +86,12 @@ public class ReadStoryTest {
     // EFFECTS: checks that the skeleton is correct
     private void checkSkeleton(List<String> skeleton) {
         assertEquals(7, skeleton.size());
-        assertEquals("Here's a name, ", skeleton.get(0));
-        assertEquals(" and a food, ", skeleton.get(1));
-        assertEquals(" and the name again, ", skeleton.get(2));
-        assertEquals(" and a course, ", skeleton.get(3));
-        assertEquals(" and the food again, ", skeleton.get(4));
-        assertEquals(" and an animal, ", skeleton.get(5));
+        assertEquals("Here's a name,", skeleton.get(0));
+        assertEquals(" and a food,", skeleton.get(1));
+        assertEquals(" and the name again,", skeleton.get(2));
+        assertEquals(" and a course,", skeleton.get(3));
+        assertEquals(" and the food again,", skeleton.get(4));
+        assertEquals(" and an animal,", skeleton.get(5));
         assertEquals(" end.", skeleton.get(6));
     }
 

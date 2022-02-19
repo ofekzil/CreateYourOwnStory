@@ -7,7 +7,6 @@ import java.util.List;
 // a list of prompts (the questions that correspond to the story),
 // a list of integers representing the locations of each answer in the story
 // and an empty list to be filled with answers
-// TODO: add a setPrompts() and setAnswers() method to set the answers and prompts to given parameter
 public class Story {
 
     private List<String> skeleton;
@@ -102,5 +101,15 @@ public class Story {
 
     public List<Answer> getAnswers() {
         return answers;
+    }
+
+    // setters
+
+    public void setPrompts(List<Prompt> prompts) {
+        this.prompts = prompts;
+    }
+
+    public void setAnswers(List<Answer> answers) {
+        this.answers = answers;
     }
 }

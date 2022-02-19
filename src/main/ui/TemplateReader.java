@@ -20,30 +20,30 @@ public abstract class TemplateReader {
     // MODIFIES: this
     // EFFECTS: read story from txt file and sort information into appropriate lists, depending on it being a new
     // story or loaded one
-    public void readFile(String name, String state) throws FileNotFoundException {
-        File file = new File(name);
-        Scanner sc = new Scanner(file);
-        List<String> promptsString = new ArrayList<>();
-        List<Integer> locations = new ArrayList<>();
-        List<String> skeleton = new ArrayList<>();
+    public void readTemplateFile(String name) {
+        try {
+            File file = new File(name);
+            Scanner sc = new Scanner(file);
+            List<String> promptsString = new ArrayList<>();
+            List<Integer> locations = new ArrayList<>();
+            List<String> skeleton = new ArrayList<>();
 
-        while (sc.hasNext()) {
-            if (sc.hasNextInt()) {
-                locations.add(sc.nextInt());
-            } else if (locations.size() == 0) {
-                if (state.equals("new")) {
+            while (sc.hasNext()) {
+                if (sc.hasNextInt()) {
+                    locations.add(sc.nextInt());
+                } else if (locations.size() == 0) {
                     promptsString.add(sc.nextLine());
-                } else if (state.equals("load")) {
-                    sc.nextLine();
+                } else {
+                    skeleton.add(sc.nextLine());
                 }
-            } else {
-                skeleton.add(sc.nextLine());
             }
+            sc.close();
+            skeleton.remove(skeleton.get(0));
+            List<Prompt> prompts = turnToPrompts(promptsString);
+            story = new Story(skeleton, prompts, locations);
+        } catch (FileNotFoundException e) {
+            System.out.println("could not find template file " + name);
         }
-        sc.close();
-        skeleton.remove(skeleton.get(0));
-        List<Prompt> prompts = turnToPrompts(promptsString);
-        story = new Story(skeleton, prompts, locations);
     }
 
     // EFFECTS: turns list of strings from file into prompts

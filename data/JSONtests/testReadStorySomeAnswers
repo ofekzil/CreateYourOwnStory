@@ -1,19 +1,19 @@
 {
-  "name": "data/testTemplate",
-  "prompts": [
-    {
-      "prompt": "Choose a course"
-    },
-    {
-      "prompt": "Choose an animal"
-    }
-  ],
-  "answers": [
-    {
-      "answer": "John Doe"
-    },
-    {
-      "answer":"pizza"
-    }
-  ]
+    "name": "data/testTemplate",
+    "prompts": [
+        {
+          "prompt": "Choose a course"
+        },
+        {
+          "prompt": "Choose an animal"
+        }
+    ],
+    "answers": [
+        {
+          "answer": "John Doe"
+        },
+        {
+          "answer":"pizza"
+        }
+    ]
 }
