@@ -1,18 +1,10 @@
 {
   "name": "data/testTemplate.txt",
-  "prompts": [],
   "answers": [
-    {
-      "answer": "John Doe"
-    },
-    {
-      "answer": "pizza"
-    },
-    {
-      "answer": "CPSC 210"
-    },
-    {
-      "answer": "dog"
-    }
-  ]
+    {"answer": "John Doe"},
+    {"answer": "pizza"},
+    {"answer": "CPSC 210"},
+    {"answer": "dog"}
+  ],
+  "prompts": []
 }

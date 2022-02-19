@@ -1,18 +1,10 @@
 {
-    "name": "data/testTemplate.txt",
-    "prompts": [
-      {
-        "prompt": "Choose a name"
-      },
-      {
-        "prompt": "Choose a food"
-      },
-      {
-        "prompt": "Choose a course"
-      },
-      {
-        "prompt": "Choose an animal"
-      }
-    ],
-    "answers": []
+  "name": "data/testTemplate.txt",
+  "answers": [],
+  "prompts": [
+    {"prompt": "Choose a name"},
+    {"prompt": "Choose a food"},
+    {"prompt": "Choose a course"},
+    {"prompt": "Choose an animal"}
+  ]
 }

@@ -26,9 +26,8 @@ public class WriteStoryTest extends StoryJsonTest {
     @Test
     void testWriteNonExistentFile() {
         try {
-            writer = new WriteStory("data/JSONtests/nonExistentFile.json");
+            writer = new WriteStory("data/JSONtests/nonExistentFile\n.json");
             writer.write(story, "data/testTemplate.txt");
-            writer.save();
             fail("Should catch file not found exception");
         } catch (IOException e) {
             // expected
@@ -38,11 +37,10 @@ public class WriteStoryTest extends StoryJsonTest {
     @Test
     void testWriteNoAnswers() {
         try {
-            writer = new WriteStory("data/JSONtests/testWriteStoryBlank.json");
+            writer = new WriteStory("data/JSONtests/testWriteStoryNoAnswers.json");
             writer.write(story, "data/testTemplate.txt");
-            writer.save();
 
-            reader = new ReadStory("data/JSONtests/testWriteStoryBlank.json");
+            reader = new ReadStory("data/JSONtests/testWriteStoryNoAnswers.json");
             Story str = reader.read();
             checkSkeleton(str.getSkeleton());
             checkLocations(str.getLocations());
@@ -62,7 +60,6 @@ public class WriteStoryTest extends StoryJsonTest {
             story.setAnswers(answers);
             writer = new WriteStory("data/JSONtests/testWriteStorySomeAnswers.json");
             writer.write(story, "data/testTemplate.txt");
-            writer.save();
 
             reader = new ReadStory("data/JSONtests/testWriteStorySomeAnswers.json");
             Story str = reader.read();
@@ -84,7 +81,6 @@ public class WriteStoryTest extends StoryJsonTest {
             story.setAnswers(answers);
             writer = new WriteStory("data/JSONtests/testWriteStoryAllAnswers.json");
             writer.write(story, "data/testTemplate.txt");
-            writer.save();
 
             reader = new ReadStory("data/JSONtests/testWriteStoryAllAnswers.json");
             Story str = reader.read();

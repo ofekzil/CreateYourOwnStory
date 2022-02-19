@@ -1,5 +1,8 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,6 +86,37 @@ public class Story {
             }
         }
         return broken;
+    }
+
+    // EFFECTS: returns a JSON representation of story w/ given name
+    public JSONObject toJson(String name) {
+        JSONObject jo = new JSONObject();
+        jo.put("name", name);
+        jo.put("prompts", promptsToJson());
+        jo.put("answers", answersToJson());
+        return jo;
+    }
+
+    // EFFECTS: turns prompts to JSONArray
+    private JSONArray promptsToJson() {
+        JSONArray ja = new JSONArray();
+        for (Prompt p : prompts) {
+            JSONObject j = new JSONObject();
+            j.put("prompt", p.getPrompt());
+            ja.put(j);
+        }
+        return ja;
+    }
+
+    // EFFECTS: turns answers to JSONArray
+    private JSONArray answersToJson() {
+        JSONArray ja = new JSONArray();
+        for (Answer a : answers) {
+            JSONObject j = new JSONObject();
+            j.put("answer", a.getAnswer());
+            ja.put(j);
+        }
+        return ja;
     }
 
     // getters
