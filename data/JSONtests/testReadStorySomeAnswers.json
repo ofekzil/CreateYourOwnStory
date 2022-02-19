@@ -1,5 +1,5 @@
 {
-    "name": "data/testTemplate",
+    "name": "data/testTemplate.txt",
     "prompts": [
         {
           "prompt": "Choose a course"

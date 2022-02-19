@@ -1,5 +1,6 @@
 package ui;
 
+import model.Answer;
 import model.Prompt;
 import model.Story;
 
@@ -52,6 +53,16 @@ public abstract class TemplateReader {
         for (String s : los) {
             Prompt p = new Prompt(s);
             result.add(p);
+        }
+        return result;
+    }
+
+    // EFFECTS: turns list of strings from file into prompts
+    public List<Answer> turnToAnswers(List<String> los) {
+        List<Answer> result = new ArrayList<>();
+        for (String s : los) {
+            Answer a = new Answer(s);
+            result.add(a);
         }
         return result;
     }
