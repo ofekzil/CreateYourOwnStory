@@ -22,6 +22,7 @@ public class ReadStory extends TemplateReader {
         this.file = file;
     }
 
+    // MODIFIES: this
     // EFFECTS: reads and returns Story from file; throws IOException if it can't find json file
     public Story read() throws IOException {
         String jsonData = scanFile(file);
@@ -44,12 +45,12 @@ public class ReadStory extends TemplateReader {
     // EFFECTS: builds the story from given sources
     private Story buildStory(JSONObject jo) {
         String name = jo.getString("name");
-        readTemplateFile(name);
+        readTemplateFile(name, false);
         List<Prompt> prompts = addPrompts(jo);
         List<Answer> answers = addAnswers(jo);
-        story.setPrompts(prompts);
-        story.setAnswers(answers);
-        return story;
+        toRead.setPrompts(prompts);
+        toRead.setAnswers(answers);
+        return toRead;
     }
 
     // EFFECTS: creates a list of prompts from jo

@@ -1,0 +1,26 @@
+{
+  "answers": [
+    {"answer": "kingdom"},
+    {"answer": "adh"},
+    {"answer": "bad"},
+    {"answer": "good"},
+    {"answer": "Sharon"},
+    {"answer": "gold"},
+    {"answer": "year"},
+    {"answer": "sculptur"},
+    {"answer": "sadness"},
+    {"answer": "rabies"},
+    {"answer": "fifteen"},
+    {"answer": "July"},
+    {"answer": "attic"}
+  ],
+  "prompts": [
+    {"prompt": "Choose a name for another kingdom"},
+    {"prompt": "Choose a number"},
+    {"prompt": "Name a magical creature"},
+    {"prompt": "Name a kind of tree"},
+    {"prompt": "Name a fruit (in plural)"},
+    {"prompt": "Name a body part"},
+    {"prompt": "Choose a colour"}
+  ]
+}

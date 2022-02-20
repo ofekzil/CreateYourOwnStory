@@ -13,15 +13,16 @@ import java.util.Scanner;
 // represents a class to read a story template from txt file
 public abstract class TemplateReader {
 
-    protected Story story;
+    protected Story toApp;
+    protected Story toRead;
 
     // REQUIRES: file must have the text in the following order: first all prompts (each on new line),
     // then all locations (as ints in a single line), then the rest of the skeleton with line breaks every time a prop
     // needs to be inserted
     // MODIFIES: this
     // EFFECTS: read story from txt file and sort information into appropriate lists, depending on it being a new
-    // story or loaded one
-    public void readTemplateFile(String name) {
+    // story or loaded one. True for new, False for load
+    public void readTemplateFile(String name, boolean state) {
         try {
             File file = new File(name);
             Scanner sc = new Scanner(file);
@@ -41,9 +42,19 @@ public abstract class TemplateReader {
             sc.close();
             skeleton.remove(skeleton.get(0));
             List<Prompt> prompts = turnToPrompts(promptsString);
-            story = new Story(skeleton, prompts, locations);
+            determineState(state, locations, skeleton, prompts);
         } catch (FileNotFoundException e) {
             System.out.println("could not find template file " + name);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: determines whether to assign story to app or read
+    private void determineState(boolean state, List<Integer> locations, List<String> skeleton, List<Prompt> prompts) {
+        if (state) {
+            toApp = new Story(skeleton, prompts, locations);
+        } else {
+            toRead = new Story(skeleton, prompts, locations);
         }
     }
 
