@@ -90,7 +90,7 @@ public class Story {
         return broken;
     }
 
-    // EFFECTS: returns a JSON representation of story w/ given name
+    // EFFECTS: returns a JSON representation of story
     public JSONObject toJson() {
         JSONObject jo = new JSONObject();
         jo.put("name", name);

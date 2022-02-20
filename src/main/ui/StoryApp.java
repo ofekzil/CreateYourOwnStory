@@ -41,14 +41,15 @@ public class StoryApp extends TemplateReader {
     public void start() {
         System.out.println("Welcome! Please select one of the following options:\n n = new story\n l = load story\n "
                 + "q = quit the application");
+        String selection = user.nextLine();
         while (true) {
-            if (user.nextLine().equalsIgnoreCase("n")) {
+            if (selection.equalsIgnoreCase("n")) {
                 chooseStory();
                 break;
-            } else if (user.nextLine().equalsIgnoreCase("l")) {
+            } else if (selection.equalsIgnoreCase("l")) {
                 loadStory();
                 break;
-            } else if (user.nextLine().equalsIgnoreCase("q")) {
+            } else if (selection.equalsIgnoreCase("q")) {
                 System.out.println("Goodbye!");
                 break;
             } else {
@@ -113,7 +114,7 @@ public class StoryApp extends TemplateReader {
 
     // MODIFIES: this
     // EFFECTS: prints the prompts and collects the user's answers, then prints the finished story; saves story
-    // if user quits
+    // if user quits and at the end
     public void makeStory() {
         List<Prompt> prompts = storyToApp.getPrompts();
         List<Prompt> toRemove = new ArrayList<>();
@@ -130,6 +131,8 @@ public class StoryApp extends TemplateReader {
                 storyToApp.addAnswer(answer);
             }
         }
+        prompts.removeAll(toRemove);
+        saveStory();
         storyToApp.setAnswersInOrder();
         String fullStory = storyToApp.createStory();
         String brokenStory = storyToApp.breakLines(fullStory);
