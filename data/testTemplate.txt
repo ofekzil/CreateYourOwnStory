@@ -1,3 +1,4 @@
+data/testTemplate.txt
 Choose a name
 Choose a food
 Choose a course

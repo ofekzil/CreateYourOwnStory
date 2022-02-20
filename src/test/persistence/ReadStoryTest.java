@@ -29,6 +29,7 @@ public class ReadStoryTest extends StoryJsonTest {
         try {
             reader = new ReadStory("data/JSONtests/testReadStoryNoAnswers.json");
             Story str = reader.read();
+            assertEquals("data/testTemplate.txt", str.getName());
             checkSkeleton(str.getSkeleton());
             checkLocations(str.getLocations());
             checkPrompts(str.getPrompts(), 0);
@@ -44,6 +45,7 @@ public class ReadStoryTest extends StoryJsonTest {
         try {
             reader = new ReadStory("data/JSONtests/testReadStorySomeAnswers.json");
             Story str = reader.read();
+            assertEquals("data/testTemplate.txt", str.getName());
             checkSkeleton(str.getSkeleton());
             checkLocations(str.getLocations());
             checkPrompts(str.getPrompts(), 2);
@@ -59,6 +61,7 @@ public class ReadStoryTest extends StoryJsonTest {
         try {
             reader = new ReadStory("data/JSONtests/testReadStoryAllAnswers.json");
             Story str = reader.read();
+            assertEquals("data/testTemplate.txt", str.getName());
             checkSkeleton(str.getSkeleton());
             checkLocations(str.getLocations());
             assertTrue(str.getPrompts().isEmpty());

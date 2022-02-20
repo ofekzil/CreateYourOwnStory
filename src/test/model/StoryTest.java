@@ -65,20 +65,22 @@ public class StoryTest {
         locations4 = new ArrayList<Integer>();
         locations4.addAll(Arrays.asList(0, 1, 0, 2, 1, 0));
 
-        story1 = new Story(skeleton1, prompts1, locations1);
-        story2 = new Story(skeleton2, prompts2, locations2);
-        story3 = new Story(skeleton3, prompts3, locations3);
-        story4 = new Story(skeleton4, prompts4, locations4);
+        story1 = new Story("data/templates/test1.txt", skeleton1, prompts1, locations1);
+        story2 = new Story("data/templates/test2.txt", skeleton2, prompts2, locations2);
+        story3 = new Story("data/templates/test3.txt", skeleton3, prompts3, locations3);
+        story4 = new Story("data/templates/test4.txt", skeleton4, prompts4, locations4);
     }
 
     @Test
     void testConstructor() {
+        assertEquals("data/templates/test1.txt", story1.getName());
         assertEquals("This is my character, ", story1.getSkeleton().get(0));
         assertEquals(", who is very smart.", story1.getSkeleton().get(1));
         assertEquals("Choose a character name", story1.getPrompts().get(0).getPrompt());
         assertEquals(0, story1.getLocations().get(0));
         assertTrue(story1.getAnswers().isEmpty());
 
+        assertEquals("data/templates/test2.txt", story2.getName());
         assertEquals("I like to eat ", story2.getSkeleton().get(0));
         assertEquals(" while ", story2.getSkeleton().get(1));
         assertEquals(" thinks it is mandatory you do homework for ", story2.getSkeleton().get(2));
@@ -128,7 +130,7 @@ public class StoryTest {
         List<Prompt> lop = new ArrayList<Prompt>();
         lop.add(p);
         List<Integer> loi = new ArrayList<>(Arrays.asList(0, 0, 0, 0));
-        Story st = new Story(skel, lop, loi);
+        Story st = new Story("data/templates/someFile.txt", skel, lop, loi);
         st.addAnswer("pizza");
 
         st.setAnswersInOrder();

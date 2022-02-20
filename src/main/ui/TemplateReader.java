@@ -13,10 +13,11 @@ import java.util.Scanner;
 // represents a class to read a story template from txt file
 public abstract class TemplateReader {
 
-    protected Story toApp;
-    protected Story toRead;
+    protected Story storyToApp;
+    protected Story storyToRead;
 
-    // REQUIRES: file must have the text in the following order: first all prompts (each on new line),
+    // REQUIRES: file must have the text in the following order: first the name of the relative path,
+    // then all prompts (each on new line),
     // then all locations (as ints in a single line), then the rest of the skeleton with line breaks every time a prop
     // needs to be inserted
     // MODIFIES: this
@@ -26,6 +27,7 @@ public abstract class TemplateReader {
         try {
             File file = new File(name);
             Scanner sc = new Scanner(file);
+            String fileName = sc.nextLine();
             List<String> promptsString = new ArrayList<>();
             List<Integer> locations = new ArrayList<>();
             List<String> skeleton = new ArrayList<>();
@@ -42,7 +44,7 @@ public abstract class TemplateReader {
             sc.close();
             skeleton.remove(skeleton.get(0));
             List<Prompt> prompts = turnToPrompts(promptsString);
-            determineState(state, locations, skeleton, prompts);
+            determineState(state, fileName, locations, skeleton, prompts);
         } catch (FileNotFoundException e) {
             System.out.println("could not find template file " + name);
         }
@@ -50,11 +52,12 @@ public abstract class TemplateReader {
 
     // MODIFIES: this
     // EFFECTS: determines whether to assign story to app or read
-    private void determineState(boolean state, List<Integer> locations, List<String> skeleton, List<Prompt> prompts) {
+    private void determineState(boolean state, String fileName, List<Integer> locations,
+                                List<String> skeleton, List<Prompt> prompts) {
         if (state) {
-            toApp = new Story(skeleton, prompts, locations);
+            storyToApp = new Story(fileName, skeleton, prompts, locations);
         } else {
-            toRead = new Story(skeleton, prompts, locations);
+            storyToRead = new Story(fileName, skeleton, prompts, locations);
         }
     }
 

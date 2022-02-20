@@ -12,14 +12,16 @@ import java.util.List;
 // and an empty list to be filled with answers
 public class Story {
 
+    private String name;
     private List<String> skeleton;
     private List<Prompt> prompts;
     private List<Integer> locations;
     private List<Answer> answers;
 
     // REQUIRES: no duplicate prompts AND locations.size + 1 = skeleton.size
-    // EFFECTS: constructs a Story with a skeleton, prompts, locations and an empty list of answers
-    public Story(List<String> skeleton, List<Prompt> prompts, List<Integer> locations) {
+    // EFFECTS: constructs a Story with a name of its file, skeleton, prompts, locations and an empty list of answers
+    public Story(String name, List<String> skeleton, List<Prompt> prompts, List<Integer> locations) {
+        this.name = name;
         this.skeleton = skeleton;
         this.prompts = prompts;
         this.locations = locations;
@@ -89,7 +91,7 @@ public class Story {
     }
 
     // EFFECTS: returns a JSON representation of story w/ given name
-    public JSONObject toJson(String name) {
+    public JSONObject toJson() {
         JSONObject jo = new JSONObject();
         jo.put("name", name);
         jo.put("prompts", promptsToJson());
@@ -120,6 +122,10 @@ public class Story {
     }
 
     // getters
+
+    public String getName() {
+        return name;
+    }
 
     public List<String> getSkeleton() {
         return skeleton;

@@ -48,9 +48,9 @@ public class ReadStory extends TemplateReader {
         readTemplateFile(name, false);
         List<Prompt> prompts = addPrompts(jo);
         List<Answer> answers = addAnswers(jo);
-        toRead.setPrompts(prompts);
-        toRead.setAnswers(answers);
-        return toRead;
+        storyToRead.setPrompts(prompts);
+        storyToRead.setAnswers(answers);
+        return storyToRead;
     }
 
     // EFFECTS: creates a list of prompts from jo

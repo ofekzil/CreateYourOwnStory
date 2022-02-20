@@ -1,3 +1,4 @@
+data/templates/KingdomFemale.txt
 Choose a name for a kingdom
 Choose an adjective
 And another adjective

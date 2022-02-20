@@ -33,9 +33,9 @@ public class StoryJsonTest extends TemplateReader {
     }
 
     // EFFECTS: checks the answers starting at 0 and ending at maxIndex
-    protected void checkAnswers(List<Answer> prompts, int maxIndex) {
+    protected void checkAnswers(List<Answer> answers, int maxIndex) {
         for (int i = 0; i < maxIndex; i++) {
-            String actual = prompts.get(i).getAnswer();
+            String actual = answers.get(i).getAnswer();
             String expected = answersString.get(i);
             assertEquals(expected, actual);
         }

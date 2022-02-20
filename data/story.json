@@ -1,26 +1,32 @@
 {
+  "name": "data/templates/CrazyMorningMale.txt",
   "answers": [
-    {"answer": "kingdom"},
-    {"answer": "adh"},
-    {"answer": "bad"},
-    {"answer": "good"},
-    {"answer": "Sharon"},
-    {"answer": "gold"},
-    {"answer": "year"},
-    {"answer": "sculptur"},
-    {"answer": "sadness"},
-    {"answer": "rabies"},
-    {"answer": "fifteen"},
-    {"answer": "July"},
-    {"answer": "attic"}
+    {"answer": "Ofek"},
+    {"answer": "Slash"},
+    {"answer": "car"}
   ],
   "prompts": [
-    {"prompt": "Choose a name for another kingdom"},
-    {"prompt": "Choose a number"},
-    {"prompt": "Name a magical creature"},
-    {"prompt": "Name a kind of tree"},
-    {"prompt": "Name a fruit (in plural)"},
-    {"prompt": "Name a body part"},
-    {"prompt": "Choose a colour"}
+    {"prompt": "Choose a company name"},
+    {"prompt": "Choose a number (type in words, e.g. seven, one)"},
+    {"prompt": "Name a verb (in present tense, e.g. walk, talk)"},
+    {"prompt": "And another verb"},
+    {"prompt": "Name a musical instrument"},
+    {"prompt": "Name a fruit"},
+    {"prompt": "Choose a food"},
+    {"prompt": "Choose an animal"},
+    {"prompt": "Now the animal's name"},
+    {"prompt": "Choose a country"},
+    {"prompt": "And another country"},
+    {"prompt": "Name a fast person"},
+    {"prompt": "Name a vehicle"},
+    {"prompt": "Name a kind of building"},
+    {"prompt": "Choose a number (type in words, e.g. seven, one)"},
+    {"prompt": "Name a room (e.g. attic, living room)"},
+    {"prompt": "Choose an emotion"},
+    {"prompt": "Name a componenet of the product you chose earlier"},
+    {"prompt": "Name a candy"},
+    {"prompt": "Name an adjective"},
+    {"prompt": "And another adjective"},
+    {"prompt": "Choose a bodypart"}
   ]
 }

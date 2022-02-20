@@ -27,7 +27,7 @@ public class WriteStoryTest extends StoryJsonTest {
     void testWriteNonExistentFile() {
         try {
             writer = new WriteStory("data/JSONtests/nonExistentFile\n.json");
-            writer.write(toApp, "data/testTemplate.txt");
+            writer.write(storyToApp);
             fail("Should catch file not found exception");
         } catch (IOException e) {
             // expected
@@ -38,10 +38,11 @@ public class WriteStoryTest extends StoryJsonTest {
     void testWriteNoAnswers() {
         try {
             writer = new WriteStory("data/JSONtests/testWriteStoryNoAnswers.json");
-            writer.write(toApp, "data/testTemplate.txt");
+            writer.write(storyToApp);
 
             reader = new ReadStory("data/JSONtests/testWriteStoryNoAnswers.json");
             Story str = reader.read();
+            assertEquals("data/testTemplate.txt", str.getName());
             checkSkeleton(str.getSkeleton());
             checkLocations(str.getLocations());
             checkPrompts(str.getPrompts(), 0);
@@ -56,13 +57,14 @@ public class WriteStoryTest extends StoryJsonTest {
         try {
             List<Prompt> prompts = turnToPrompts(Arrays.asList("Choose a course", "Choose an animal"));
             List<Answer> answers = turnToAnswers(Arrays.asList("John Doe", "pizza"));
-            toApp.setPrompts(prompts);
-            toApp.setAnswers(answers);
+            storyToApp.setPrompts(prompts);
+            storyToApp.setAnswers(answers);
             writer = new WriteStory("data/JSONtests/testWriteStorySomeAnswers.json");
-            writer.write(toApp, "data/testTemplate.txt");
+            writer.write(storyToApp);
 
             reader = new ReadStory("data/JSONtests/testWriteStorySomeAnswers.json");
             Story str = reader.read();
+            assertEquals("data/testTemplate.txt", str.getName());
             checkSkeleton(str.getSkeleton());
             checkLocations(str.getLocations());
             checkPrompts(str.getPrompts(), 2);
@@ -77,13 +79,14 @@ public class WriteStoryTest extends StoryJsonTest {
         try {
             List<Prompt> prompts = new ArrayList<>();
             List<Answer> answers = turnToAnswers(Arrays.asList("John Doe", "pizza", "CPSC 210", "dog"));
-            toApp.setPrompts(prompts);
-            toApp.setAnswers(answers);
+            storyToApp.setPrompts(prompts);
+            storyToApp.setAnswers(answers);
             writer = new WriteStory("data/JSONtests/testWriteStoryAllAnswers.json");
-            writer.write(toApp, "data/testTemplate.txt");
+            writer.write(storyToApp);
 
             reader = new ReadStory("data/JSONtests/testWriteStoryAllAnswers.json");
             Story str = reader.read();
+            assertEquals("data/testTemplate.txt", str.getName());
             checkSkeleton(str.getSkeleton());
             checkLocations(str.getLocations());
             assertTrue(str.getPrompts().isEmpty());

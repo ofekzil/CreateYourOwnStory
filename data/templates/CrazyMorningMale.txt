@@ -1,3 +1,4 @@
+data/templates/CrazyMorningMale.txt
 Choose your protagonist's name
 Name a musician/band
 Name a technological product
