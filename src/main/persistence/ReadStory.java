@@ -4,7 +4,6 @@ import model.Answer;
 import model.Prompt;
 import model.Story;
 import org.json.*;
-import ui.TemplateReader;
 
 import java.io.File;
 import java.io.IOException;

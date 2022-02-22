@@ -3,7 +3,6 @@ package persistence;
 import model.Story;
 import org.json.JSONObject;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 

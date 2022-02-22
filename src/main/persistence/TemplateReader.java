@@ -1,4 +1,4 @@
-package ui;
+package persistence;
 
 import model.Answer;
 import model.Prompt;
@@ -22,7 +22,7 @@ public abstract class TemplateReader {
     // needs to be inserted
     // MODIFIES: this
     // EFFECTS: read story from txt file and sort information into appropriate lists, depending on it being a new
-    // story or loaded one. True for new, False for load
+    // story or loaded one. True for new, False for load. Throws FileNotFound exception if it can't find txt file
     public void readTemplateFile(String name, boolean state) {
         try {
             File file = new File(name);

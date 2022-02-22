@@ -3,7 +3,6 @@ package persistence;
 import model.Answer;
 import model.Prompt;
 import org.junit.jupiter.api.BeforeEach;
-import ui.TemplateReader;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,12 +10,14 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+// represents a class to include methods for testing both ReadStory and WriteStory
 public class StoryJsonTest extends TemplateReader {
+
     protected List<String> promptsString;
     protected List<String> answersString;
 
     @BeforeEach
-    void setUp() {
+    protected void setUp() {
         promptsString = new ArrayList<>();
         answersString = new ArrayList<>();
         promptsString.addAll(Arrays.asList("Choose a name", "Choose a food", "Choose a course", "Choose an animal"));

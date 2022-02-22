@@ -5,10 +5,10 @@ import model.Story;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+// Unit tests for ReadStory class
 public class ReadStoryTest extends StoryJsonTest {
 
     private ReadStory reader;

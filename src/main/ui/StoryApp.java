@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 import model.Prompt;
 import persistence.ReadStory;
+import persistence.TemplateReader;
 import persistence.WriteStory;
 
 // along with user input, this class writes the story accordingly
