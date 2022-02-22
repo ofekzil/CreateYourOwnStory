@@ -6,6 +6,7 @@ import model.Story;
 import org.json.*;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,8 +42,8 @@ public class ReadStory extends TemplateReader {
     }
 
     // MODIFIES: this
-    // EFFECTS: builds the story from given sources
-    private Story buildStory(JSONObject jo) {
+    // EFFECTS: builds the story from given sources; throws FileNotFound exception if template file doesn't exist
+    private Story buildStory(JSONObject jo) throws FileNotFoundException {
         String name = jo.getString("name");
         readTemplateFile(name, false);
         List<Prompt> prompts = addPrompts(jo);

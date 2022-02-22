@@ -21,7 +21,7 @@ public class WriteStory {
 
     // MODIFIES: this
     // EFFECTS: writes to file the prompts left and answers so far,
-    // along w/ story's template file name; throws FileNotFoundException if it can't find file
+    // along w/ story's template file name; throws IOException if it can't find file
     public void write(Story story) throws IOException {
         writer = new PrintWriter(dest);
         JSONObject jo = story.toJson();

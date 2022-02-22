@@ -4,6 +4,7 @@ package persistence;
 import model.Story;
 import org.junit.jupiter.api.Test;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,6 +13,16 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ReadStoryTest extends StoryJsonTest {
 
     private ReadStory reader;
+
+    @Test
+    void testReadTemplateFileNonExistent() {
+        try {
+            readTemplateFile("data/nonExistentFile.txt", false);
+            fail("expected file not found exception");
+        } catch (FileNotFoundException e) {
+            // expected
+        }
+    }
 
     @Test
     void testReadNonExistentFile() {

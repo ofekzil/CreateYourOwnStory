@@ -23,31 +23,28 @@ public abstract class TemplateReader {
     // MODIFIES: this
     // EFFECTS: read story from txt file and sort information into appropriate lists, depending on it being a new
     // story or loaded one. True for new, False for load. Throws FileNotFound exception if it can't find txt file
-    public void readTemplateFile(String name, boolean state) {
-        try {
-            File file = new File(name);
-            Scanner sc = new Scanner(file);
-            String fileName = sc.nextLine();
-            List<String> promptsString = new ArrayList<>();
-            List<Integer> locations = new ArrayList<>();
-            List<String> skeleton = new ArrayList<>();
+    public void readTemplateFile(String name, boolean state) throws FileNotFoundException {
 
-            while (sc.hasNext()) {
-                if (sc.hasNextInt()) {
-                    locations.add(sc.nextInt());
-                } else if (locations.size() == 0) {
-                    promptsString.add(sc.nextLine());
-                } else {
-                    skeleton.add(sc.nextLine());
-                }
+        File file = new File(name);
+        Scanner sc = new Scanner(file);
+        String fileName = sc.nextLine();
+        List<String> promptsString = new ArrayList<>();
+        List<Integer> locations = new ArrayList<>();
+        List<String> skeleton = new ArrayList<>();
+
+        while (sc.hasNext()) {
+            if (sc.hasNextInt()) {
+                locations.add(sc.nextInt());
+            } else if (locations.size() == 0) {
+                promptsString.add(sc.nextLine());
+            } else {
+                skeleton.add(sc.nextLine());
             }
-            sc.close();
-            skeleton.remove(skeleton.get(0));
-            List<Prompt> prompts = turnToPrompts(promptsString);
-            determineState(state, fileName, locations, skeleton, prompts);
-        } catch (FileNotFoundException e) {
-            System.out.println("could not find template file " + name);
         }
+        sc.close();
+        skeleton.remove(skeleton.get(0));
+        List<Prompt> prompts = turnToPrompts(promptsString);
+        determineState(state, fileName, locations, skeleton, prompts);
     }
 
     // MODIFIES: this

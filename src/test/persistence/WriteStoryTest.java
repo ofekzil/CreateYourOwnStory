@@ -6,6 +6,7 @@ import model.Story;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,7 +22,11 @@ public class WriteStoryTest extends StoryJsonTest {
 
     @BeforeEach
     void setStory() {
-        readTemplateFile("data/testTemplate.txt", true);
+        try {
+            readTemplateFile("data/testTemplate.txt", true);
+        } catch (FileNotFoundException e) {
+            fail("file should exist");
+        }
     }
 
     @Test
@@ -49,7 +54,7 @@ public class WriteStoryTest extends StoryJsonTest {
             checkPrompts(str.getPrompts(), 0);
             assertTrue(str.getAnswers().isEmpty());
         } catch (IOException e){
-            fail("should've caught file not found exception");
+            fail("caught IOException");
         }
     }
 
@@ -71,7 +76,7 @@ public class WriteStoryTest extends StoryJsonTest {
             checkPrompts(str.getPrompts(), 2);
             checkAnswers(str.getAnswers(), 2);
         } catch (IOException e){
-            fail("should've caught file not found exception");
+            fail("caught IOException");
         }
     }
 
@@ -93,7 +98,7 @@ public class WriteStoryTest extends StoryJsonTest {
             assertTrue(str.getPrompts().isEmpty());
             checkAnswers(str.getAnswers(), str.getAnswers().size());
         } catch (IOException e){
-            fail("should've caught file not found exception");
+            fail("caught IOException");
         }
     }
 

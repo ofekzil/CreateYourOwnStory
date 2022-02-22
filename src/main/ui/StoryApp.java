@@ -1,5 +1,6 @@
 package ui;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
@@ -45,7 +46,11 @@ public class StoryApp extends TemplateReader {
         String selection = user.nextLine();
         while (true) {
             if (selection.equalsIgnoreCase("n")) {
-                chooseStory();
+                try {
+                    chooseStory();
+                } catch (FileNotFoundException e) {
+                    System.out.println("Could not read template file");
+                }
                 break;
             } else if (selection.equalsIgnoreCase("l")) {
                 loadStory();
@@ -61,8 +66,9 @@ public class StoryApp extends TemplateReader {
     }
 
     // MODIFIES: this
-    // EFFECTS: chooses story template based on user input
-    public void chooseStory() {
+    // EFFECTS: chooses story template based on user input; throws FileNotFound exception if template file doesn't
+    //          exist
+    public void chooseStory() throws FileNotFoundException {
         String names = TEMPLATE_NAMES.toString().replace("[", "").replace("]", "");
         System.out.println("Welcome! Please select a story template and type the number. Options are 1 through "
                 + TEMPLATES.size() / 2 + ",\nwhich correspond to the following templates: " + names
@@ -84,8 +90,9 @@ public class StoryApp extends TemplateReader {
     }
 
     // MODIFIES: this
-    // EFFECTS: chooses male/female template based on user input
-    public void chooseMaleOrFemale(int template) {
+    // EFFECTS: chooses male/female template based on user input; throws FileNotFound exception if template file
+    //          doesn't exist
+    public void chooseMaleOrFemale(int template) throws FileNotFoundException {
         System.out.println("Please type either \"male\" or \"female\" (no quotes) in order to choose the "
                 + "template for your protagonist. \nYou will then be presented with a series of prompts to fill out, "
                 + "which will complete the story accordingly.\n If you wish to quit the application at any point, "
