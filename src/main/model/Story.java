@@ -53,7 +53,7 @@ public class Story {
                 inOrder.add(answers.get(i));
             }
         }
-        this.answers = inOrder;
+        setAnswers(inOrder);
     }
 
     // REQUIRES: all prompts have been answered AND are in proper order according to locations

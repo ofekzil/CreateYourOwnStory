@@ -16,13 +16,12 @@ public abstract class TemplateReader {
     protected Story storyToApp;
     protected Story storyToRead;
 
-    // REQUIRES: file must have the text in the following order: first the name of the relative path,
-    // then all prompts (each on new line),
-    // then all locations (as ints in a single line), then the rest of the skeleton with line breaks every time a prop
-    // needs to be inserted
+    // REQUIRES: txt file must have the text in the following order: first the name of the relative path,
+    // then all prompts (each on new line), then all locations (as ints in a single line), then the rest of
+    // the skeleton with line breaks every time a prop needs to be inserted
     // MODIFIES: this
-    // EFFECTS: read story from txt file and sort information into appropriate lists, depending on it being a new
-    // story or loaded one. True for new, False for load. Throws FileNotFound exception if it can't find txt file
+    // EFFECTS: read story from txt file and sort information into appropriate lists, then determines whether to assign
+    // them to storyToApp or storyToRead. Throws FileNotFound exception if it can't find txt file
     public void readTemplateFile(String name, boolean state) throws FileNotFoundException {
 
         File file = new File(name);
@@ -48,7 +47,7 @@ public abstract class TemplateReader {
     }
 
     // MODIFIES: this
-    // EFFECTS: determines whether to assign story to app or read
+    // EFFECTS: determines whether to assign story to app or read; true = app, false = read
     private void determineState(boolean state, String fileName, List<Integer> locations,
                                 List<String> skeleton, List<Prompt> prompts) {
         if (state) {
@@ -68,7 +67,7 @@ public abstract class TemplateReader {
         return result;
     }
 
-    // EFFECTS: turns list of strings from file into prompts
+    // EFFECTS: turns list of strings from file into answers
     public List<Answer> turnToAnswers(List<String> los) {
         List<Answer> result = new ArrayList<>();
         for (String s : los) {

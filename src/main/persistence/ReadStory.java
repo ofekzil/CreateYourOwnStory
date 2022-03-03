@@ -38,6 +38,7 @@ public class ReadStory extends TemplateReader {
         while (sc.hasNext()) {
             str += sc.nextLine();
         }
+        sc.close();
         return str;
     }
 
