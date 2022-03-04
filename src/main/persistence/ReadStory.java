@@ -67,7 +67,7 @@ public class ReadStory extends TemplateReader {
         return result;
     }
 
-    // EFFECTS: creates a list of prompts from jo
+    // EFFECTS: creates a list of answers from jo
     private List<Answer> addAnswers(JSONObject jo) {
         JSONArray ja = jo.getJSONArray("answers");
         List<Answer> result = new ArrayList<>();

@@ -25,6 +25,34 @@ public class ReadStoryTest extends StoryJsonTest {
     }
 
     @Test
+    void testReadTemplateFileExistsToRead() {
+        try {
+            readTemplateFile("data/testTemplate.txt", false);
+            assertEquals("data/testTemplate.txt", storyToRead.getName());
+            checkSkeleton(storyToRead.getSkeleton());
+            checkLocations(storyToRead.getLocations());
+            checkPrompts(storyToRead.getPrompts(), 0);
+            assertTrue(storyToRead.getAnswers().isEmpty());
+        } catch (FileNotFoundException e) {
+            fail("caught file not found exception");
+        }
+    }
+
+    @Test
+    void testReadTemplateFileExistsToApp() {
+        try {
+            readTemplateFile("data/testTemplate.txt", true);
+            assertEquals("data/testTemplate.txt", storyToApp.getName());
+            checkSkeleton(storyToApp.getSkeleton());
+            checkLocations(storyToApp.getLocations());
+            checkPrompts(storyToApp.getPrompts(), 0);
+            assertTrue(storyToApp.getAnswers().isEmpty());
+        } catch (FileNotFoundException e) {
+            fail("caught file not found exception");
+        }
+    }
+
+    @Test
     void testReadNonExistentFile() {
         try {
             reader = new ReadStory("data/JSONtests/nonExistentFile.json");

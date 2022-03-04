@@ -25,16 +25,7 @@ public class WriteStory {
     public void write(Story story) throws IOException {
         writer = new PrintWriter(dest);
         JSONObject jo = story.toJson();
-        save(jo.toString(INDENT));
+        writer.print(jo.toString(INDENT));
         writer.close();
     }
-
-    // MODIFIES: this
-    // EFFECTS: writes the string to file
-    private void save(String str) {
-        writer.print(str);
-    }
-
-
-
 }

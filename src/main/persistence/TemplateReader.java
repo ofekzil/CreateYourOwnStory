@@ -58,7 +58,7 @@ public abstract class TemplateReader {
     }
 
     // EFFECTS: turns list of strings from file into prompts
-    public List<Prompt> turnToPrompts(List<String> los) {
+    protected List<Prompt> turnToPrompts(List<String> los) {
         List<Prompt> result = new ArrayList<>();
         for (String s : los) {
             Prompt p = new Prompt(s);
@@ -68,7 +68,7 @@ public abstract class TemplateReader {
     }
 
     // EFFECTS: turns list of strings from file into answers
-    public List<Answer> turnToAnswers(List<String> los) {
+    protected List<Answer> turnToAnswers(List<String> los) {
         List<Answer> result = new ArrayList<>();
         for (String s : los) {
             Answer a = new Answer(s);
