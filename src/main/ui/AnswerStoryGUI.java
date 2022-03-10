@@ -38,7 +38,7 @@ public class AnswerStoryGUI implements ListSelectionListener {
         List<Prompt> prompts = story.getPrompts();
         answers = new JList(answersModel);
         answers.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        answers.addListSelectionListener(this);
+     //   answers.addListSelectionListener(this);
         panel.add(answers);
         collectAnswer(prompts);
         storyApp.add(panel, BorderLayout.WEST);

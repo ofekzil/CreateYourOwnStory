@@ -55,6 +55,7 @@ public class StoryAppGUI extends JFrame {
         input.setPreferredSize(new Dimension(500, 30));
         Font font = new Font("Arial", Font.PLAIN, 15);
         input.setFont(font);
+        input.setEditable(true);
         setButtons();
         activePrompt = new JLabel("Prompt");
         panel.add(activePrompt);
