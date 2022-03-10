@@ -77,6 +77,13 @@ public abstract class TemplateReader {
         return result;
     }
 
+    // getters
 
+    public Story getStoryToApp() {
+        return storyToApp;
+    }
 
+    public Story getStoryToRead() {
+        return storyToRead;
+    }
 }
