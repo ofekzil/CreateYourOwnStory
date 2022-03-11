@@ -1,14 +1,15 @@
 package ui;
 
+import model.Prompt;
 import model.Story;
 import persistence.ReadStory;
 import persistence.WriteStory;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class StoryAppGUI extends JFrame {
 
@@ -24,11 +25,11 @@ public class StoryAppGUI extends JFrame {
     private JButton update;
     private JLabel activePrompt;
     private JPanel panel;
-    private String chosen;
 
     private ReadStory reader;
     private WriteStory writer;
     private Story story;
+    private List<Prompt> promptsToRemove;
 
     // MODIFIES: this
     // EFFECTS: sets up GUI for initializing app
@@ -40,7 +41,7 @@ public class StoryAppGUI extends JFrame {
         createPanel();
         add(menu, BorderLayout.NORTH);
         add(panel, BorderLayout.PAGE_END);
-        menu.addActionListener(e -> { // will change to proper item if selected here, so can implement menu choices
+        menu.addActionListener(e -> {
             int index = menu.getSelectedIndex();
             choose(index);
         });
@@ -48,6 +49,7 @@ public class StoryAppGUI extends JFrame {
 
         reader = new ReadStory(StoryApp.STORE);
         writer = new WriteStory(StoryApp.STORE);
+        promptsToRemove = new ArrayList<>();
     }
 
     // MODIFIES: this
@@ -79,28 +81,31 @@ public class StoryAppGUI extends JFrame {
 
     // MODIFIES: this
     // EFFECTS: chooses template/action based on user choice
-    // TODO: add helpers to actually load templates (will probably be a call to new AnswerStoryGUI), which
-    //  will set GUI for answering
     private void choose(int index) {
-        JLabel label = new JLabel(); // only temporary to see selection works
         try {
             if (0 <= index && index <= 3) {
-                label.setText(TEMPLATES[index] + " " + index);
                 reader.readTemplateFile(TEMPLATES[index], true);
                 story = reader.getStoryToApp();
-                //new AnswerStoryGUI(story); // add a parameter of story to constructor
+                validate();
+                repaint();
+                new AnswerStoryGUI(this, story);
             } else if (index == 4) {
-                label.setText(index + " load");
                 story = reader.read();
-                //new AnswerStoryGUI(story); // add a parameter of story to constructor
+                new AnswerStoryGUI(this, story);
             } else {
-                label.setText(index + " save");
+                List<Prompt> currentPrompts = story.getPrompts();
+                currentPrompts.removeAll(promptsToRemove);
                 writer.write(story);
             }
-            add(label);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: adds prompt to remove when save is selected
+    public void addToRemove(Prompt p) {
+        promptsToRemove.add(p);
     }
 
     public JButton getSubmit() {

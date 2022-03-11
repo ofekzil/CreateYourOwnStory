@@ -11,6 +11,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AnswerStoryGUI implements ListSelectionListener {
@@ -19,35 +20,52 @@ public class AnswerStoryGUI implements ListSelectionListener {
     private JProgressBar progressBar;
     private JList answers;
     private DefaultListModel answersModel;
-    private String currentPrompt;
 
     private Story story;
+    private List<Prompt> promptsToRemove;
 
     // EFFECTS: constructs an object to display GUI when answering questions
-    public AnswerStoryGUI() {
-        JPanel panel1 = new JPanel();
-        JPanel panel2 = new JPanel();
-        storyApp = new StoryAppGUI();
-        setStory();
+    public AnswerStoryGUI(StoryAppGUI storyApp, Story story) {
+        this.storyApp = storyApp;
+        promptsToRemove = new ArrayList<>();
+        this.story = story;
+      //  setStory();
+        JPanel barPanel = setBar();
+        JPanel listPanel = setList();
+        this.storyApp.add(barPanel, BorderLayout.WEST);
+        this.storyApp.add(listPanel, BorderLayout.CENTER);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: creates a panel for progress bar
+    private JPanel setBar() {
+        JPanel panel = new JPanel();
+        JLabel label = new JLabel("Progress:");
+        panel.add(label);
+        panel.add(Box.createHorizontalStrut(3));
         progressBar = new JProgressBar(0, story.getPrompts().size());
         progressBar.setBorderPainted(true);
         progressBar.setMaximumSize(new Dimension(30, 20));
         progressBar.setVisible(true);
         progressBar.setStringPainted(true);
-        panel1.add(progressBar);
-      //  panel2.add(Box.createHorizontalStrut(50));
+        panel.add(progressBar);
+        return panel;
+    }
+
+    // MODIFIES: this
+    // EFFECTS: constructs a panel for list of answers
+    private JPanel setList() {
+        JPanel panel = new JPanel();
         answersModel = new DefaultListModel<>();
         List<Prompt> prompts = story.getPrompts();
         answers = new JList(answersModel);
         answers.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         answers.setBackground(storyApp.getBackground());
-     //   answers.addListSelectionListener(this);
-        panel2.add(answers);
+        panel.add(answers);
         collectAnswer(prompts);
-        storyApp.add(panel1, BorderLayout.WEST);
-        storyApp.add(panel2, BorderLayout.CENTER);
+        return panel;
     }
-
+/*
     // MODIFIES: this
     // EFFECTS: assigns value to story (temporary)
     private void setStory() {
@@ -61,13 +79,16 @@ public class AnswerStoryGUI implements ListSelectionListener {
 
     }
 
+ */
+
     // MODIFIES: this
     // EFFECTS: collects answer from user input and chooses whether to answer current prompt or update one
     private void collectAnswer(List<Prompt> prompts) {
         JButton submit = storyApp.getSubmit();
         JButton update = storyApp.getUpdate();
-        storyApp.setActivePrompt(prompts.get(0).getPrompt());
-        prompts.remove(0);
+        Prompt initial = prompts.get(0);
+        storyApp.setActivePrompt(initial.getPrompt());
+        storyApp.addToRemove(initial);
         submit.addActionListener(new SubmitListener(prompts));
         update.addActionListener(new UpdateListener());
     }
@@ -85,15 +106,25 @@ public class AnswerStoryGUI implements ListSelectionListener {
     }
 
     public static void main(String[] args) {
-        new AnswerStoryGUI();
+        ReadStory reader = new ReadStory(StoryApp.STORE);
+        try {
+            reader.readTemplateFile("data/testTemplate.txt", true);
+            Story story = reader.getStoryToApp();
+            new AnswerStoryGUI(new StoryAppGUI(), story);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private class SubmitListener implements ActionListener {
 
         private List<Prompt> prompts;
+        private int index;
 
+        // EFFECTS: constructs an action listener for submit button
         public SubmitListener(List<Prompt> prompts) {
             this.prompts = prompts;
+            index = 0;
         }
 
         // MODIFIES: this
@@ -101,13 +132,15 @@ public class AnswerStoryGUI implements ListSelectionListener {
         // TODO: remove isEmpty condition. Instead add it to collectAnswer, and call makeStory then
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (!prompts.isEmpty()) {
+            if (index < prompts.size()) {
+                index++;
                 String answer = storyApp.getInput().getText();
                 answersModel.addElement(answer);
                 story.addAnswer(answer);
                 storyApp.getInput().setText("");
-                storyApp.setActivePrompt(prompts.get(0).getPrompt());
-                prompts.remove(0);
+                Prompt current = prompts.get(index);
+                storyApp.setActivePrompt(current.getPrompt());
+                storyApp.addToRemove(current);
                 updateBar();
             }
         }

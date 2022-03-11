@@ -1,14 +1,13 @@
 {
-  "name": "data/templates/CrazyMorningMale.txt",
+  "name": "data/templates/CrazyMorningFemale.txt",
   "answers": [
-    {"answer": "Sean"},
-    {"answer": "band"},
-    {"answer": "hjf"},
-    {"answer": "hjkh"},
-    {"answer": "vhh"},
-    {"answer": "gh"}
+    {"answer": "efasfafaf"},
+    {"answer": "sdvdsvsevsev"},
+    {"answer": "v gsrg sef"}
   ],
   "prompts": [
+    {"prompt": "Choose a number (type in words, e.g. seven, one)"},
+    {"prompt": "Name a verb (in present tense, e.g. walk, talk)"},
     {"prompt": "And another verb"},
     {"prompt": "Name a musical instrument"},
     {"prompt": "Name a fruit"},
