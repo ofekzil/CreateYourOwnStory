@@ -25,23 +25,27 @@ public class AnswerStoryGUI implements ListSelectionListener {
 
     // EFFECTS: constructs an object to display GUI when answering questions
     public AnswerStoryGUI() {
-        JPanel panel = new JPanel();
+        JPanel panel1 = new JPanel();
+        JPanel panel2 = new JPanel();
         storyApp = new StoryAppGUI();
         setStory();
         progressBar = new JProgressBar(0, story.getPrompts().size());
         progressBar.setBorderPainted(true);
         progressBar.setMaximumSize(new Dimension(30, 20));
-        panel.add(progressBar);
         progressBar.setVisible(true);
-        panel.add(Box.createHorizontalStrut(100));
+        progressBar.setStringPainted(true);
+        panel1.add(progressBar);
+      //  panel2.add(Box.createHorizontalStrut(50));
         answersModel = new DefaultListModel<>();
         List<Prompt> prompts = story.getPrompts();
         answers = new JList(answersModel);
         answers.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        answers.setBackground(storyApp.getBackground());
      //   answers.addListSelectionListener(this);
-        panel.add(answers);
+        panel2.add(answers);
         collectAnswer(prompts);
-        storyApp.add(panel, BorderLayout.WEST);
+        storyApp.add(panel1, BorderLayout.WEST);
+        storyApp.add(panel2, BorderLayout.CENTER);
     }
 
     // MODIFIES: this
