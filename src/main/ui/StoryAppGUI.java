@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+// represents a class to run a GUI representation of the app
 public class StoryAppGUI extends JFrame {
 
     public static final String[] TEMPLATES = {"data/templates/CrazyMorningMale.txt",
@@ -83,6 +84,8 @@ public class StoryAppGUI extends JFrame {
         bottomPanel.add(update);
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets buttons for app
     private void setButtons() {
         submit = new JButton("Submit");
         update = new JButton("Update");
@@ -123,6 +126,7 @@ public class StoryAppGUI extends JFrame {
         promptsToRemove.clear();
     }
 
+    // getters
 
     public JButton getSubmit() {
         return submit;
@@ -155,6 +159,8 @@ public class StoryAppGUI extends JFrame {
     public List<Prompt> getPromptsToRemove() {
         return promptsToRemove;
     }
+
+    // setters
 
     public void setActivePrompt(String str) {
         activePrompt.setText(str);

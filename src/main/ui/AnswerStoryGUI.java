@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.List;
 
+// represents a class to collect answers from user
 public class AnswerStoryGUI {
 
     private StoryAppGUI storyApp;
@@ -46,7 +47,7 @@ public class AnswerStoryGUI {
     }
 
     // MODIFIES: this
-    // EFFECTS: constructs a panel for list of answers
+    // EFFECTS: creates a panel for list of answers
     private void setList() {
         JPanel panel = storyApp.getListPanel();
         answersModel = new DefaultListModel<>();
@@ -57,7 +58,8 @@ public class AnswerStoryGUI {
     }
 
     // MODIFIES: this
-    // EFFECTS: collects answer from user input and chooses whether to answer current prompt or update one
+    // EFFECTS: if prompts are empty, proceed to display story; otherwise collects answer from user input
+    //          and chooses whether to answer current prompt or update one;
     private void collectAnswer(List<Prompt> prompts) {
         if (!prompts.isEmpty()) {
             JButton submit = storyApp.getSubmit();

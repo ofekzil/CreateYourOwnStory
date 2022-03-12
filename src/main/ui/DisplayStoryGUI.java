@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 
+// represents a class to display a complete story
 public class DisplayStoryGUI {
 
     private StoryAppGUI storyApp;
