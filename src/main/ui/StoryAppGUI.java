@@ -24,7 +24,9 @@ public class StoryAppGUI extends JFrame {
     private JButton submit;
     private JButton update;
     private JLabel activePrompt;
-    private JPanel panel;
+    private JPanel bottomPanel;
+    private JPanel listPanel;
+    private JPanel barPanel;
 
     private ReadStory reader;
     private WriteStory writer;
@@ -38,13 +40,17 @@ public class StoryAppGUI extends JFrame {
         setMinimumSize(new Dimension(1000, 800));
         menu = new JComboBox(menuItems);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        createPanel();
+        createBottomPanel();
         add(menu, BorderLayout.NORTH);
-        add(panel, BorderLayout.PAGE_END);
+        add(bottomPanel, BorderLayout.PAGE_END);
         menu.addActionListener(e -> {
             int index = menu.getSelectedIndex();
             choose(index);
         });
+        listPanel = new JPanel();
+        barPanel = new JPanel();
+        add(barPanel, BorderLayout.WEST);
+        add(listPanel, BorderLayout.CENTER);
         setVisible(true);
 
         reader = new ReadStory(StoryApp.STORE);
@@ -53,23 +59,28 @@ public class StoryAppGUI extends JFrame {
     }
 
     // MODIFIES: this
-    // EFFECTS: creates a panel for prompt, answer input, and buttons
-    private void createPanel() {
-        panel = new JPanel();
+    // EFFECTS: adds prompt to remove when save is selected
+    public void addToRemove(Prompt p) {
+        promptsToRemove.add(p);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: creates a panel for active prompt, answer input, and buttons
+    private void createBottomPanel() {
+        bottomPanel = new JPanel();
         input = new JTextField();
         input.setPreferredSize(new Dimension(500, 30));
-        Font font = new Font("Arial", Font.PLAIN, 15);
-        input.setFont(font);
+        input.setFont(new Font("Arial", Font.PLAIN, 15));
         input.setEditable(true);
         setButtons();
-        activePrompt = new JLabel("Prompt");
-        panel.add(activePrompt);
-        panel.add(Box.createHorizontalStrut(5));
-        panel.add(input);
-        panel.add(Box.createHorizontalStrut(5));
-        panel.add(submit);
-        panel.add(Box.createHorizontalStrut(5));
-        panel.add(update);
+        activePrompt = new JLabel();
+        bottomPanel.add(activePrompt);
+        bottomPanel.add(Box.createHorizontalStrut(5));
+        bottomPanel.add(input);
+        bottomPanel.add(Box.createHorizontalStrut(5));
+        bottomPanel.add(submit);
+        bottomPanel.add(Box.createHorizontalStrut(5));
+        bottomPanel.add(update);
     }
 
     private void setButtons() {
@@ -84,15 +95,15 @@ public class StoryAppGUI extends JFrame {
     private void choose(int index) {
         try {
             if (0 <= index && index <= 3) {
+                clearTopPanelsAndPrompts();
                 reader.readTemplateFile(TEMPLATES[index], true);
                 story = reader.getStoryToApp();
-                validate();
-                repaint();
                 new AnswerStoryGUI(this, story);
             } else if (index == 4) {
+                clearTopPanelsAndPrompts();
                 story = reader.read();
                 new AnswerStoryGUI(this, story);
-            } else {
+            } else { // TODO: add a message that says story has been saved and exit the app
                 List<Prompt> currentPrompts = story.getPrompts();
                 currentPrompts.removeAll(promptsToRemove);
                 writer.write(story);
@@ -103,10 +114,13 @@ public class StoryAppGUI extends JFrame {
     }
 
     // MODIFIES: this
-    // EFFECTS: adds prompt to remove when save is selected
-    public void addToRemove(Prompt p) {
-        promptsToRemove.add(p);
+    // EFFECTS: clears the bar and list panels
+    private void clearTopPanelsAndPrompts() {
+        barPanel.removeAll();
+        listPanel.removeAll();
+        promptsToRemove.clear();
     }
+
 
     public JButton getSubmit() {
         return submit;
@@ -122,6 +136,14 @@ public class StoryAppGUI extends JFrame {
 
     public JLabel getActivePrompt() {
         return activePrompt;
+    }
+
+    public JPanel getBarPanel() {
+        return barPanel;
+    }
+
+    public JPanel getListPanel() {
+        return listPanel;
     }
 
     public void setActivePrompt(String str) {
