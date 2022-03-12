@@ -26,6 +26,8 @@ public class AnswerStoryGUI {
         this.story = story;
         setBar();
         setList();
+        List<Prompt> prompts = story.getPrompts();
+        collectAnswer(prompts);
     }
 
     // MODIFIES: this
@@ -48,24 +50,24 @@ public class AnswerStoryGUI {
     private void setList() {
         JPanel panel = storyApp.getListPanel();
         answersModel = new DefaultListModel<>();
-        List<Prompt> prompts = story.getPrompts();
         answers = new JList(answersModel);
         answers.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         answers.setBackground(storyApp.getBackground());
         panel.add(answers);
-        collectAnswer(prompts);
     }
 
     // MODIFIES: this
     // EFFECTS: collects answer from user input and chooses whether to answer current prompt or update one
     private void collectAnswer(List<Prompt> prompts) {
-        JButton submit = storyApp.getSubmit();
-        JButton update = storyApp.getUpdate();
-        Prompt initial = prompts.get(0);
-        storyApp.setActivePrompt(initial.getPrompt());
-        storyApp.addToRemove(initial);
-        submit.addActionListener(new SubmitListener(prompts));
-        update.addActionListener(new UpdateListener());
+        if (!prompts.isEmpty()) {
+            JButton submit = storyApp.getSubmit();
+            JButton update = storyApp.getUpdate();
+            storyApp.setActivePrompt(prompts.get(0).getPrompt());
+            submit.addActionListener(new SubmitListener(prompts));
+            update.addActionListener(new UpdateListener());
+        } else {
+            new DisplayStoryGUI(storyApp, story);
+        }
     }
 
     // MODIFIES: this
@@ -99,19 +101,25 @@ public class AnswerStoryGUI {
 
         // MODIFIES: this
         // EFFECTS: collects answer from input when submit is pressed, and adds it to story accordingly
-        // TODO: add some condition that will call  new DisplayStoryGUI when all has been answered
         @Override
         public void actionPerformed(ActionEvent e) {
+            Prompt current = prompts.get(index);
+            storyApp.setActivePrompt(current.getPrompt());
+            storyApp.addToRemove(current);
             if (index < prompts.size()) {
                 index++;
                 String answer = storyApp.getInput().getText();
                 answersModel.addElement(answer);
                 story.addAnswer(answer);
                 storyApp.getInput().setText("");
-                Prompt current = prompts.get(index);
-                storyApp.setActivePrompt(current.getPrompt());
-                storyApp.addToRemove(current);
-                updateBar();
+                if (index == prompts.size()) {
+                    prompts.removeAll(storyApp.getPromptsToRemove());
+                    new DisplayStoryGUI(storyApp, story);
+                } else {
+                    Prompt next = prompts.get(index);
+                    storyApp.setActivePrompt(next.getPrompt());
+                    updateBar();
+                }
             }
         }
     }

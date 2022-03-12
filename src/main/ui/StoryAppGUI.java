@@ -96,11 +96,13 @@ public class StoryAppGUI extends JFrame {
         try {
             if (0 <= index && index <= 3) {
                 clearTopPanelsAndPrompts();
+                input.setEditable(true);
                 reader.readTemplateFile(TEMPLATES[index], true);
                 story = reader.getStoryToApp();
                 new AnswerStoryGUI(this, story);
             } else if (index == 4) {
                 clearTopPanelsAndPrompts();
+                input.setEditable(true);
                 story = reader.read();
                 new AnswerStoryGUI(this, story);
             } else { // TODO: add a message that says story has been saved and exit the app
@@ -115,7 +117,7 @@ public class StoryAppGUI extends JFrame {
 
     // MODIFIES: this
     // EFFECTS: clears the bar and list panels
-    private void clearTopPanelsAndPrompts() {
+    public void clearTopPanelsAndPrompts() {
         barPanel.removeAll();
         listPanel.removeAll();
         promptsToRemove.clear();
@@ -144,6 +146,14 @@ public class StoryAppGUI extends JFrame {
 
     public JPanel getListPanel() {
         return listPanel;
+    }
+
+    public WriteStory getWriter() {
+        return writer;
+    }
+
+    public List<Prompt> getPromptsToRemove() {
+        return promptsToRemove;
     }
 
     public void setActivePrompt(String str) {

@@ -1,26 +1,26 @@
 {
   "name": "data/templates/KingdomMale.txt",
   "answers": [
-    {"answer": "holland"},
-    {"answer": "njih bhugi"}
+    {"answer": "Kingdom1"},
+    {"answer": "fast"},
+    {"answer": "smart"},
+    {"answer": "dumb"},
+    {"answer": "Michael"},
+    {"answer": "chocolate"},
+    {"answer": "second"},
+    {"answer": "painter"},
+    {"answer": "sadness"},
+    {"answer": "polio"},
+    {"answer": "seven"},
+    {"answer": "June"},
+    {"answer": "living room"},
+    {"answer": "Kingdom2"},
+    {"answer": "three"},
+    {"answer": "troll"},
+    {"answer": "oak"},
+    {"answer": "plums"},
+    {"answer": "feet"},
+    {"answer": "red"}
   ],
-  "prompts": [
-    {"prompt": "And even another adjetcive"},
-    {"prompt": "Choose your protagonist's name"},
-    {"prompt": "Name an expensive gift"},
-    {"prompt": "Name a unit of time (e.g. year, day)"},
-    {"prompt": "Name a creative occupation"},
-    {"prompt": "Name an emotion"},
-    {"prompt": "Name a disease"},
-    {"prompt": "Choose a number"},
-    {"prompt": "Name a month"},
-    {"prompt": "Name a room (e.g. attic, living room)"},
-    {"prompt": "Choose a name for another kingdom"},
-    {"prompt": "Choose a number"},
-    {"prompt": "Name a magical creature"},
-    {"prompt": "Name a kind of tree"},
-    {"prompt": "Name a fruit (in plural)"},
-    {"prompt": "Name a body part"},
-    {"prompt": "Choose a colour"}
-  ]
+  "prompts": []
 }
