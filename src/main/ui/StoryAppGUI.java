@@ -66,6 +66,14 @@ public class StoryAppGUI extends JFrame {
     }
 
     // MODIFIES: this
+    // EFFECTS: clears the bar and list panels
+    public void clearTopPanelsAndPrompts() {
+        barPanel.removeAll();
+        listPanel.removeAll();
+        promptsToRemove.clear();
+    }
+
+    // MODIFIES: this
     // EFFECTS: creates a panel for active prompt, answer input, and buttons
     private void createBottomPanel() {
         bottomPanel = new JPanel();
@@ -108,10 +116,8 @@ public class StoryAppGUI extends JFrame {
                 input.setEditable(true);
                 story = reader.read();
                 new AnswerStoryGUI(this, story);
-            } else { // TODO: add a message that says story has been saved and exit the app
-                List<Prompt> currentPrompts = story.getPrompts();
-                currentPrompts.removeAll(promptsToRemove);
-                writer.write(story);
+            } else {
+                saveStory();
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -119,12 +125,16 @@ public class StoryAppGUI extends JFrame {
     }
 
     // MODIFIES: this
-    // EFFECTS: clears the bar and list panels
-    public void clearTopPanelsAndPrompts() {
-        barPanel.removeAll();
-        listPanel.removeAll();
-        promptsToRemove.clear();
+    // EFFECTS: saves story, prints a confirmation and terminates the app
+    private void saveStory() throws IOException {
+        List<Prompt> currentPrompts = story.getPrompts();
+        currentPrompts.removeAll(promptsToRemove);
+        writer.write(story);
+        JOptionPane.showMessageDialog(null, "Your story has been saved.\nPress OK to quit",
+                "Save & Quit", JOptionPane.PLAIN_MESSAGE);
+        System.exit(0);
     }
+
 
     // getters
 

@@ -1,5 +1,6 @@
 package ui;
 
+import model.Answer;
 import model.Prompt;
 import model.Story;
 import persistence.ReadStory;
@@ -134,9 +135,12 @@ public class AnswerStoryGUI {
         public void actionPerformed(ActionEvent e) {
             String answer = storyApp.getInput().getText();
             int index = answers.getSelectedIndex();
+            List<Answer> storyAnswers = story.getAnswers();
             if (index != -1) {
                 answersModel.remove(index);
                 answersModel.add(index, answer);
+                storyAnswers.remove(index);
+                storyAnswers.add(index, new Answer(answer));
                 storyApp.getInput().setText("");
             }
         }
