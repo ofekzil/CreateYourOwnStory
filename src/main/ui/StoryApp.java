@@ -143,8 +143,8 @@ public class StoryApp extends TemplateReader {
         saveStory();
         storyToApp.setAnswersInOrder();
         String fullStory = storyToApp.createStory();
-        String brokenStory = storyToApp.breakLines(fullStory);
-        System.out.println(brokenStory);
+      //  String brokenStory = storyToApp.breakLines(fullStory);
+        System.out.println(fullStory);
     }
 
     // MODIFIES: this

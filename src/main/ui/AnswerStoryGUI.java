@@ -59,8 +59,8 @@ public class AnswerStoryGUI {
     }
 
     // MODIFIES: this
-    // EFFECTS: if prompts are empty, proceed to display story; otherwise collects answer from user input
-    //          and chooses whether to answer current prompt or update one;
+    // EFFECTS: if prompts are empty, proceed to display story w/ full progress bar; otherwise collects answer
+    //          from user input and chooses whether to answer current prompt or update one;
     private void collectAnswer(List<Prompt> prompts) {
         if (!prompts.isEmpty()) {
             storyApp.setActivePrompt(prompts.get(0).getPrompt());

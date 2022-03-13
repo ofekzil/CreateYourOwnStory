@@ -12,6 +12,8 @@ import java.util.List;
 // and an empty list to be filled with answers
 public class Story {
 
+    public static final String ANSWER_FORMAT = "_%s_";
+
     private String name;
     private List<String> skeleton;
     private List<Prompt> prompts;
@@ -66,12 +68,12 @@ public class Story {
             if (i >= answers.size()) {
                 complete += skeleton.get(i);
             } else {
-                complete += skeleton.get(i) + answers.get(i).getAnswer();
+                complete += skeleton.get(i) + formatAnswer(answers.get(i).getAnswer());
             }
         }
         return complete;
     }
-
+/*
     // REQUIRES: str is a COMPLETE story
     // EFFECTS: adds line breaks to a complete story
     public String breakLines(String str) {
@@ -88,6 +90,13 @@ public class Story {
             }
         }
         return broken;
+    }
+ */
+
+    // MODIFIES: answer
+    // EFFECTS: formats string of answer
+    private String formatAnswer(String answer) {
+        return String.format(ANSWER_FORMAT, answer);
     }
 
     // EFFECTS: returns a JSON representation of story
