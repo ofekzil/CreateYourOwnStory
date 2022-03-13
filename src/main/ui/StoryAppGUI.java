@@ -66,9 +66,8 @@ public class StoryAppGUI extends JFrame {
     }
 
     // MODIFIES: this
-    // EFFECTS: clears the bar and list panels
-    public void clearTopPanelsAndPrompts() {
-        barPanel.removeAll();
+    // EFFECTS: clears the list panel and clears promptsToRemove
+    public void clearListPanelAndPrompts() {
         listPanel.removeAll();
         promptsToRemove.clear();
     }
@@ -102,17 +101,19 @@ public class StoryAppGUI extends JFrame {
     }
 
     // MODIFIES: this
-    // EFFECTS: chooses template/action based on user choice
+    // EFFECTS: chooses template/action based on user choice, and sets panels accordingly
     private void choose(int index) {
         try {
             if (0 <= index && index <= 3) {
-                clearTopPanelsAndPrompts();
+                clearListPanelAndPrompts();
+                barPanel.removeAll();
                 input.setEditable(true);
                 reader.readTemplateFile(TEMPLATES[index], true);
                 story = reader.getStoryToApp();
                 new AnswerStoryGUI(this, story);
             } else if (index == 4) {
-                clearTopPanelsAndPrompts();
+                clearListPanelAndPrompts();
+                barPanel.removeAll();
                 input.setEditable(true);
                 story = reader.read();
                 new AnswerStoryGUI(this, story);

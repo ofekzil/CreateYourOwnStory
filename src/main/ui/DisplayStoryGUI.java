@@ -24,7 +24,7 @@ public class DisplayStoryGUI {
         this.story = story;
         writer = this.storyApp.getWriter();
         saveStory();
-        this.storyApp.clearTopPanelsAndPrompts();
+        this.storyApp.clearListPanelAndPrompts();
         disableAll();
         displayStory();
     }
@@ -46,9 +46,9 @@ public class DisplayStoryGUI {
         String complete = story.createStory();
         JPanel panel = storyApp.getListPanel();
         display = new JTextArea();
-        display.setPreferredSize(new Dimension(800, 800));
+        display.setPreferredSize(new Dimension(600, 800));
         display.setText(complete);
-        display.setFont(new Font("Arial", Font.PLAIN, 15));
+        display.setFont(new Font("Arial", Font.PLAIN, 17));
         display.setEditable(false);
         display.setLineWrap(true);
         display.setWrapStyleWord(true);
@@ -58,6 +58,8 @@ public class DisplayStoryGUI {
         storyApp.repaint();
     }
 
+    // MODIFIES: this
+    // EFFECTS: saves complete story to file
     private void saveStory() {
         try {
             writer.write(story);

@@ -41,7 +41,7 @@ public class AnswerStoryGUI {
         panel.add(Box.createHorizontalStrut(3));
         progressBar = new JProgressBar(0, story.getPrompts().size());
         progressBar.setBorderPainted(true);
-        progressBar.setMaximumSize(new Dimension(30, 20));
+        progressBar.setMaximumSize(new Dimension(40, 30));
         progressBar.setVisible(true);
         progressBar.setStringPainted(true);
         panel.add(progressBar);
@@ -63,12 +63,17 @@ public class AnswerStoryGUI {
     //          and chooses whether to answer current prompt or update one;
     private void collectAnswer(List<Prompt> prompts) {
         if (!prompts.isEmpty()) {
+            storyApp.setActivePrompt(prompts.get(0).getPrompt());
             JButton submit = storyApp.getSubmit();
             JButton update = storyApp.getUpdate();
-            storyApp.setActivePrompt(prompts.get(0).getPrompt());
+            submit.setEnabled(true);
+            update.setEnabled(true);
             submit.addActionListener(new SubmitListener(prompts));
             update.addActionListener(new UpdateListener());
         } else {
+            int newMax = story.getAnswers().size();
+            progressBar.setMaximum(newMax);
+            progressBar.setValue(newMax);
             new DisplayStoryGUI(storyApp, story);
         }
     }
@@ -103,7 +108,8 @@ public class AnswerStoryGUI {
         }
 
         // MODIFIES: this
-        // EFFECTS: collects answer from input when submit is pressed, and adds it to story accordingly
+        // EFFECTS: if index == prompts.size(), display full story; otherwise, collects answer from input when submit
+        //          is pressed, adds it to story and updates all components accordingly
         @Override
         public void actionPerformed(ActionEvent e) {
             Prompt current = prompts.get(index);
@@ -116,6 +122,7 @@ public class AnswerStoryGUI {
                 story.addAnswer(answer);
                 storyApp.getInput().setText("");
                 if (index == prompts.size()) {
+                    updateBar();
                     prompts.removeAll(storyApp.getPromptsToRemove());
                     new DisplayStoryGUI(storyApp, story);
                 } else {
