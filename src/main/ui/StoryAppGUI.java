@@ -82,8 +82,8 @@ public class StoryAppGUI extends JFrame {
         input.setEditable(true);
         setButtons();
         activePrompt = new JLabel();
+        activePrompt.setPreferredSize(new Dimension(240, 20));
         bottomPanel.add(activePrompt);
-        bottomPanel.add(Box.createHorizontalStrut(5));
         bottomPanel.add(input);
         bottomPanel.add(Box.createHorizontalStrut(5));
         bottomPanel.add(submit);

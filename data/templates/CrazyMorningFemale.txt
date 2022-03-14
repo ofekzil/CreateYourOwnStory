@@ -3,8 +3,8 @@ Choose your protagonist's name
 Name a musician/band
 Name a technological product
 Choose a company name
-Choose a number (type in words, e.g. seven, one)
-Name a verb (in present tense, e.g. walk, talk)
+Choose a number
+Name a verb (in present tense, e.g. walk)
 And another verb
 Name a musical instrument
 Name a fruit
@@ -16,10 +16,10 @@ And another country
 Name a fast person
 Name a vehicle
 Name a kind of building
-Choose a number (type in words, e.g. seven, one)
+Choose a number
 Name a room (e.g. attic, living room)
 Choose an emotion
-Name a componenet of the product you chose earlier
+Name a component of the product above
 Name a candy
 Name an adjective
 And another adjective

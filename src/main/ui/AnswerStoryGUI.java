@@ -28,7 +28,7 @@ public class AnswerStoryGUI {
         this.story = story;
         setBar();
         setList();
-        List<Prompt> prompts = story.getPrompts();
+        List<Prompt> prompts = this.story.getPrompts();
         collectAnswer(prompts);
     }
 
@@ -112,7 +112,7 @@ public class AnswerStoryGUI {
         //          is pressed, adds it to story and updates all components accordingly
         @Override
         public void actionPerformed(ActionEvent e) {
-            Prompt current = prompts.get(index);
+            Prompt current = prompts.get(index); //TODO: determine source of IndexOutOfBounds here
             storyApp.setActivePrompt(current.getPrompt());
             storyApp.addToRemove(current);
             if (index < prompts.size()) {
