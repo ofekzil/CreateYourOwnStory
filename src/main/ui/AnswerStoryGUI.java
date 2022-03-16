@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 // represents a class to collect answers from user
 public class AnswerStoryGUI {
@@ -35,11 +36,17 @@ public class AnswerStoryGUI {
     // MODIFIES: this
     // EFFECTS: creates a panel for progress bar
     private void setBar() {
+        if (story.getAnswers().isEmpty()) {
+            progressBar = new JProgressBar(0, story.getPrompts().size());
+        } else {
+            int answersSize = story.getAnswers().size();
+            progressBar = new JProgressBar(0, story.getPrompts().size() + answersSize);
+            progressBar.setValue(answersSize);
+        }
         JPanel panel = storyApp.getBarPanel();
         JLabel label = new JLabel("Progress:");
         panel.add(label);
         panel.add(Box.createHorizontalStrut(3));
-        progressBar = new JProgressBar(0, story.getPrompts().size());
         progressBar.setBorderPainted(true);
         progressBar.setMaximumSize(new Dimension(40, 30));
         progressBar.setVisible(true);
@@ -63,6 +70,7 @@ public class AnswerStoryGUI {
     //          from user input and chooses whether to answer current prompt or update one;
     private void collectAnswer(List<Prompt> prompts) {
         if (!prompts.isEmpty()) {
+            addCurrentAnswers();
             storyApp.setActivePrompt(prompts.get(0).getPrompt());
             JButton submit = storyApp.getSubmit();
             JButton update = storyApp.getUpdate();
@@ -83,6 +91,13 @@ public class AnswerStoryGUI {
     private void updateBar() {
         int current = progressBar.getValue();
         progressBar.setValue(current + 1);
+    }
+
+    private void addCurrentAnswers() {
+        List<String> answersSoFar = story.getAnswers().stream().map(Answer::getAnswer).collect(Collectors.toList());
+        for (String str : answersSoFar) {
+            answersModel.addElement(str);
+        }
     }
 
     public static void main(String[] args) {
@@ -116,11 +131,12 @@ public class AnswerStoryGUI {
             storyApp.setActivePrompt(current.getPrompt());
             storyApp.addToRemove(current);
             if (index < prompts.size()) {
+                JTextField input = storyApp.getInput();
                 index++;
-                String answer = storyApp.getInput().getText();
+                String answer = input.getText();
                 answersModel.addElement(answer);
                 story.addAnswer(answer);
-                storyApp.getInput().setText("");
+                input.setText("");
                 if (index == prompts.size()) {
                     updateBar();
                     prompts.removeAll(storyApp.getPromptsToRemove());

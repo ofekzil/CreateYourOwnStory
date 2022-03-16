@@ -128,12 +128,18 @@ public class StoryAppGUI extends JFrame {
     // MODIFIES: this
     // EFFECTS: saves story, prints a confirmation and terminates the app
     private void saveStory() throws IOException {
-        List<Prompt> currentPrompts = story.getPrompts();
-        currentPrompts.removeAll(promptsToRemove);
-        writer.write(story);
-        JOptionPane.showMessageDialog(null, "Your story has been saved.\nPress OK to quit",
-                "Save & Quit", JOptionPane.PLAIN_MESSAGE);
-        System.exit(0);
+        if (story != null) {
+            List<Prompt> currentPrompts = story.getPrompts();
+            currentPrompts.removeAll(promptsToRemove);
+            writer.write(story);
+            JOptionPane.showMessageDialog(null, "Your story has been saved.\nPress OK to quit",
+                    "Save & Quit", JOptionPane.PLAIN_MESSAGE);
+            System.exit(0);
+        } else {
+            JOptionPane.showMessageDialog(null, "Nothing to save here.\nPress OK to quit",
+                    "Save & Quit", JOptionPane.PLAIN_MESSAGE);
+            System.exit(0);
+        }
     }
 
 
