@@ -6,6 +6,7 @@ import persistence.ReadStory;
 import persistence.WriteStory;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ public class StoryAppGUI extends JFrame {
     private WriteStory writer;
     private Story story;
     private List<Prompt> promptsToRemove;
+    private List<Prompt> promptsStory;
 
     // MODIFIES: this
     // EFFECTS: sets up GUI for initializing app
@@ -42,21 +44,21 @@ public class StoryAppGUI extends JFrame {
         menu = new JComboBox(menuItems);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         createBottomPanel();
+        listPanel = new JPanel();
+        barPanel = new JPanel();
+        add(barPanel, BorderLayout.WEST);
+        add(listPanel, BorderLayout.CENTER);
+        setVisible(true);
+        reader = new ReadStory(StoryApp.STORE);
+        writer = new WriteStory(StoryApp.STORE);
+        promptsToRemove = new ArrayList<>();
+        promptsStory = new ArrayList<>();
         add(menu, BorderLayout.NORTH);
         add(bottomPanel, BorderLayout.PAGE_END);
         menu.addActionListener(e -> {
             int index = menu.getSelectedIndex();
             choose(index);
         });
-        listPanel = new JPanel();
-        barPanel = new JPanel();
-        add(barPanel, BorderLayout.WEST);
-        add(listPanel, BorderLayout.CENTER);
-        setVisible(true);
-
-        reader = new ReadStory(StoryApp.STORE);
-        writer = new WriteStory(StoryApp.STORE);
-        promptsToRemove = new ArrayList<>();
     }
 
     // MODIFIES: this
@@ -70,6 +72,13 @@ public class StoryAppGUI extends JFrame {
     public void clearListPanelAndPrompts() {
         listPanel.removeAll();
         promptsToRemove.clear();
+    }
+
+    // MODIFIES: this
+    // EFFECTS: sets border with given title
+    public void setListPanelBorder(String title) {
+        Border border = BorderFactory.createTitledBorder(title);
+        listPanel.setBorder(border);
     }
 
     // MODIFIES: this
@@ -100,29 +109,44 @@ public class StoryAppGUI extends JFrame {
         update.setActionCommand("Update");
     }
 
+    // REQUIRES: order of menu items must include all templates first in the same order as in TEMPLATES,
+    //           then load option then save option
     // MODIFIES: this
     // EFFECTS: chooses template/action based on user choice, and sets panels accordingly
     private void choose(int index) {
         try {
-            if (0 <= index && index <= 3) {
+            if (0 <= index && index <= TEMPLATES.length - 1) {
                 clearListPanelAndPrompts();
+                setStoryAndPrompts(index);
                 barPanel.removeAll();
                 input.setEditable(true);
-                reader.readTemplateFile(TEMPLATES[index], true);
-                story = reader.getStoryToApp();
-                new AnswerStoryGUI(this, story);
-            } else if (index == 4) {
+                new AnswerStoryGUI(this, story, promptsStory);
+            } else if (index == TEMPLATES.length) {
                 clearListPanelAndPrompts();
+                setStoryAndPrompts(index);
                 barPanel.removeAll();
                 input.setEditable(true);
-                story = reader.read();
-                new AnswerStoryGUI(this, story);
+                new AnswerStoryGUI(this, story, promptsStory);
             } else {
                 saveStory();
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    // REQUIRES: 0 <= index <= TEMPLATES.length
+    // MODIFIES: this
+    // EFFECTS: sets story and prompts based off of index
+    private void setStoryAndPrompts(int index) throws IOException {
+        promptsStory.clear();
+        if (index == TEMPLATES.length) {
+            story = reader.read();
+        } else {
+            reader.readTemplateFile(TEMPLATES[index], true);
+            story = reader.getStoryToApp();
+        }
+        promptsStory = story.getPrompts();
     }
 
     // MODIFIES: this
@@ -134,12 +158,11 @@ public class StoryAppGUI extends JFrame {
             writer.write(story);
             JOptionPane.showMessageDialog(null, "Your story has been saved.\nPress OK to quit",
                     "Save & Quit", JOptionPane.PLAIN_MESSAGE);
-            System.exit(0);
         } else {
             JOptionPane.showMessageDialog(null, "Nothing to save here.\nPress OK to quit",
                     "Save & Quit", JOptionPane.PLAIN_MESSAGE);
-            System.exit(0);
         }
+        System.exit(0);
     }
 
 

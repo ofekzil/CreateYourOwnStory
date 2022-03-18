@@ -22,15 +22,16 @@ public class AnswerStoryGUI {
     private DefaultListModel answersModel;
 
     private Story story;
+    private List<Prompt> prompts;
 
     // EFFECTS: constructs an object to display GUI when answering questions
-    public AnswerStoryGUI(StoryAppGUI storyApp, Story story) {
+    public AnswerStoryGUI(StoryAppGUI storyApp, Story story, List<Prompt> prompts) {
         this.storyApp = storyApp;
         this.story = story;
         setBar();
         setList();
-        List<Prompt> prompts = this.story.getPrompts();
-        collectAnswer(prompts);
+        this.prompts = prompts;
+        collectAnswer();
     }
 
     // MODIFIES: this
@@ -57,6 +58,7 @@ public class AnswerStoryGUI {
     // MODIFIES: this
     // EFFECTS: creates a panel for list of answers
     private void setList() {
+        storyApp.setListPanelBorder("Answers So Far");
         JPanel panel = storyApp.getListPanel();
         answersModel = new DefaultListModel<>();
         answers = new JList(answersModel);
@@ -68,7 +70,7 @@ public class AnswerStoryGUI {
     // MODIFIES: this
     // EFFECTS: if prompts are empty, proceed to display story w/ full progress bar; otherwise collects answer
     //          from user input and chooses whether to answer current prompt or update one;
-    private void collectAnswer(List<Prompt> prompts) {
+    private void collectAnswer() {
         if (!prompts.isEmpty()) {
             addCurrentAnswers();
             storyApp.setActivePrompt(prompts.get(0).getPrompt());
@@ -76,7 +78,7 @@ public class AnswerStoryGUI {
             JButton update = storyApp.getUpdate();
             submit.setEnabled(true);
             update.setEnabled(true);
-            submit.addActionListener(new SubmitListener(prompts));
+            submit.addActionListener(new SubmitListener());
             update.addActionListener(new UpdateListener());
         } else {
             int newMax = story.getAnswers().size();
@@ -93,6 +95,8 @@ public class AnswerStoryGUI {
         progressBar.setValue(current + 1);
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds all current answers in story to list display
     private void addCurrentAnswers() {
         List<String> answersSoFar = story.getAnswers().stream().map(Answer::getAnswer).collect(Collectors.toList());
         for (String str : answersSoFar) {
@@ -105,7 +109,7 @@ public class AnswerStoryGUI {
         try {
             reader.readTemplateFile("data/testTemplate.txt", true);
             Story story = reader.getStoryToApp();
-            new AnswerStoryGUI(new StoryAppGUI(), story);
+            new AnswerStoryGUI(new StoryAppGUI(), story, story.getPrompts());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -113,12 +117,10 @@ public class AnswerStoryGUI {
 
     private class SubmitListener implements ActionListener {
 
-        private List<Prompt> prompts;
         private int index;
 
         // EFFECTS: constructs an action listener for submit button
-        public SubmitListener(List<Prompt> prompts) {
-            this.prompts = prompts;
+        public SubmitListener() {
             index = 0;
         }
 
@@ -127,10 +129,8 @@ public class AnswerStoryGUI {
         //          is pressed, adds it to story and updates all components accordingly
         @Override
         public void actionPerformed(ActionEvent e) {
-            Prompt current = prompts.get(index);
-            storyApp.setActivePrompt(current.getPrompt());
-            storyApp.addToRemove(current);
             if (index < prompts.size()) {
+                storyApp.addToRemove(prompts.get(index));
                 JTextField input = storyApp.getInput();
                 index++;
                 String answer = input.getText();

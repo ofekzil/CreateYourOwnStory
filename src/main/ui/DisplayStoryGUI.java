@@ -23,12 +23,18 @@ public class DisplayStoryGUI {
         this.storyApp = storyApp;
         this.story = story;
         writer = this.storyApp.getWriter();
+        setListPanelForDisplay();
         saveStory();
-        this.storyApp.clearListPanelAndPrompts();
         disableAll();
         displayStory();
     }
 
+    // MODIFIES: this
+    // EFFECTS: clears list panel and sets new title
+    private void setListPanelForDisplay() {
+        storyApp.clearListPanelAndPrompts();
+        storyApp.setListPanelBorder("The Full Story");
+    }
 
     // MODIFIES: this
     // EFFECTS: disables all editable panels
