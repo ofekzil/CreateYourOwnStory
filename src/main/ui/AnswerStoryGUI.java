@@ -52,6 +52,7 @@ public class AnswerStoryGUI {
         progressBar.setMaximumSize(new Dimension(40, 30));
         progressBar.setVisible(true);
         progressBar.setStringPainted(true);
+        progressBar.setForeground(Color.RED);
         panel.add(progressBar);
     }
 
@@ -69,7 +70,7 @@ public class AnswerStoryGUI {
 
     // MODIFIES: this
     // EFFECTS: if prompts are empty, proceed to display story w/ full progress bar; otherwise collects answer
-    //          from user input and chooses whether to answer current prompt or update one;
+    //          from user input and chooses whether to answer current prompt or update one
     private void collectAnswer() {
         if (!prompts.isEmpty()) {
             addCurrentAnswers();
@@ -139,6 +140,7 @@ public class AnswerStoryGUI {
                 input.setText("");
                 if (index == prompts.size()) {
                     updateBar();
+                    progressBar.setForeground(Color.GREEN);
                     prompts.removeAll(storyApp.getPromptsToRemove());
                     storyApp.getSubmit().removeActionListener(this);
                     storyApp.getUpdate().removeActionListener(this);

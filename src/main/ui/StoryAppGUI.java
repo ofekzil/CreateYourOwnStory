@@ -69,13 +69,13 @@ public class StoryAppGUI extends JFrame {
 
     // MODIFIES: this
     // EFFECTS: clears the list panel and clears promptsToRemove
-    public void clearListPanelAndPrompts() {
+    public void clearListPanelAndPromptsToRemove() {
         listPanel.removeAll();
         promptsToRemove.clear();
     }
 
     // MODIFIES: this
-    // EFFECTS: sets border with given title
+    // EFFECTS: sets border of list panel with given title
     public void setListPanelBorder(String title) {
         Border border = BorderFactory.createTitledBorder(title);
         listPanel.setBorder(border);
@@ -116,13 +116,13 @@ public class StoryAppGUI extends JFrame {
     private void choose(int index) {
         try {
             if (0 <= index && index <= TEMPLATES.length - 1) {
-                clearListPanelAndPrompts();
+                clearListPanelAndPromptsToRemove();
                 setStoryAndPrompts(index);
                 barPanel.removeAll();
                 input.setEditable(true);
                 new AnswerStoryGUI(this, story, promptsStory);
             } else if (index == TEMPLATES.length) {
-                clearListPanelAndPrompts();
+                clearListPanelAndPromptsToRemove();
                 setStoryAndPrompts(index);
                 barPanel.removeAll();
                 input.setEditable(true);

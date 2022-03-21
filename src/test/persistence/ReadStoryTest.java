@@ -29,7 +29,7 @@ public class ReadStoryTest extends StoryJsonTest {
         try {
             readTemplateFile("data/testTemplate.txt", false);
             assertEquals("data/testTemplate.txt", storyToRead.getName());
-            checkSkeleton(storyToRead.getSkeleton());
+            checkSkeleton(getStoryToRead().getSkeleton());
             checkLocations(storyToRead.getLocations());
             checkPrompts(storyToRead.getPrompts(), 0);
             assertTrue(storyToRead.getAnswers().isEmpty());
@@ -43,7 +43,7 @@ public class ReadStoryTest extends StoryJsonTest {
         try {
             readTemplateFile("data/testTemplate.txt", true);
             assertEquals("data/testTemplate.txt", storyToApp.getName());
-            checkSkeleton(storyToApp.getSkeleton());
+            checkSkeleton(getStoryToApp().getSkeleton());
             checkLocations(storyToApp.getLocations());
             checkPrompts(storyToApp.getPrompts(), 0);
             assertTrue(storyToApp.getAnswers().isEmpty());

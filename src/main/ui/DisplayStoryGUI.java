@@ -32,7 +32,7 @@ public class DisplayStoryGUI {
     // MODIFIES: this
     // EFFECTS: clears list panel and sets new title
     private void setListPanelForDisplay() {
-        storyApp.clearListPanelAndPrompts();
+        storyApp.clearListPanelAndPromptsToRemove();
         storyApp.setListPanelBorder("The Full Story");
     }
 
