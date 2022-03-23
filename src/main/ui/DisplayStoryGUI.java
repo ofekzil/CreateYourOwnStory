@@ -1,8 +1,6 @@
 package ui;
 
-import model.Prompt;
 import model.Story;
-import persistence.ReadStory;
 import persistence.WriteStory;
 
 import javax.swing.*;
@@ -70,23 +68,8 @@ public class DisplayStoryGUI {
         try {
             writer.write(story);
         } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void main(String[] args) {
-        ReadStory reader = new ReadStory(StoryApp.STORE);
-        try {
-            reader.readTemplateFile("data/testTemplate.txt", true);
-            Story story = reader.getStoryToApp();
-            int i = 1;
-            for (Prompt p : story.getPrompts()) {
-                story.addAnswer("answer #                     " + i);
-                i++;
-            }
-            new DisplayStoryGUI(new StoryAppGUI(), story);
-        } catch (IOException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Something went wrong with loading/saving your data",
+                    "Save/Load Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 }

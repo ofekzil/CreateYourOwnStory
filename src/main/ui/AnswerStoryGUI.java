@@ -3,15 +3,12 @@ package ui;
 import model.Answer;
 import model.Prompt;
 import model.Story;
-import persistence.ReadStory;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 // represents a class to collect answers from user
 public class AnswerStoryGUI {
@@ -85,6 +82,7 @@ public class AnswerStoryGUI {
             int newMax = story.getAnswers().size();
             progressBar.setMaximum(newMax);
             progressBar.setValue(newMax);
+            progressBar.setForeground(Color.GREEN);
             new DisplayStoryGUI(storyApp, story);
         }
     }
@@ -99,23 +97,13 @@ public class AnswerStoryGUI {
     // MODIFIES: this
     // EFFECTS: adds all current answers in story to list display
     private void addCurrentAnswers() {
-        List<String> answersSoFar = story.getAnswers().stream().map(Answer::getAnswer).collect(Collectors.toList());
-        for (String str : answersSoFar) {
-            answersModel.addElement(str);
+        List<Answer> answersSoFar = story.getAnswers();
+        for (Answer a : answersSoFar) {
+            answersModel.addElement(a.getAnswer());
         }
     }
 
-    public static void main(String[] args) {
-        ReadStory reader = new ReadStory(StoryApp.STORE);
-        try {
-            reader.readTemplateFile("data/testTemplate.txt", true);
-            Story story = reader.getStoryToApp();
-            new AnswerStoryGUI(new StoryAppGUI(), story, story.getPrompts());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
+    // represents a listener for the submit answer button
     private class SubmitListener implements ActionListener {
 
         private int index;
@@ -154,6 +142,7 @@ public class AnswerStoryGUI {
         }
     }
 
+    // represents a listener for the update answer button
     private class UpdateListener implements ActionListener {
 
         // MODIFIES: this

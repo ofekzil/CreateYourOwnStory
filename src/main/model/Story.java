@@ -73,25 +73,6 @@ public class Story {
         }
         return complete;
     }
-/*
-    // REQUIRES: str is a COMPLETE story
-    // EFFECTS: adds line breaks to a complete story
-    public String breakLines(String str) {
-        String broken = "";
-        for (int i = 0; i < str.length(); i += 50) {
-            if (i >= str.length() - 50) {
-                broken += str.substring(i);
-            } else {
-                if (str.charAt(i + 50) == ' ') { //|| str.charAt(i + 50) == ',' || str.charAt(i + 50) == '.'
-                    broken += str.substring(i, i + 50) + "\n";
-                } else {
-                    broken += str.substring(i, i + 50) + "-\n";
-                }
-            }
-        }
-        return broken;
-    }
- */
 
     // MODIFIES: answer
     // EFFECTS: formats string of answer

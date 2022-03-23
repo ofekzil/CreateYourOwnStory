@@ -18,6 +18,7 @@ public class StoryAppGUI extends JFrame {
     public static final String[] TEMPLATES = {"data/templates/CrazyMorningMale.txt",
             "data/templates/CrazyMorningFemale.txt", "data/templates/KingdomMale.txt",
             "data/templates/KingdomFemale.txt"};
+    public static final String STORE = "data/story.json";
 
     private JComboBox menu;
     private String[] menuItems = {"New Crazy Morning (male)", "New Crazy Morning (female)", "New In The Kingdom (male)",
@@ -49,8 +50,8 @@ public class StoryAppGUI extends JFrame {
         add(barPanel, BorderLayout.WEST);
         add(listPanel, BorderLayout.CENTER);
         setVisible(true);
-        reader = new ReadStory(StoryApp.STORE);
-        writer = new WriteStory(StoryApp.STORE);
+        reader = new ReadStory(STORE);
+        writer = new WriteStory(STORE);
         promptsToRemove = new ArrayList<>();
         promptsStory = new ArrayList<>();
         add(menu, BorderLayout.NORTH);
@@ -131,7 +132,8 @@ public class StoryAppGUI extends JFrame {
                 saveStory();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Something went wrong with loading/saving your data",
+                    "Save/Load Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -204,10 +206,6 @@ public class StoryAppGUI extends JFrame {
 
     public void setActivePrompt(String str) {
         activePrompt.setText(str);
-    }
-
-    public static void main(String[] args) {
-        new StoryAppGUI();
     }
 
 

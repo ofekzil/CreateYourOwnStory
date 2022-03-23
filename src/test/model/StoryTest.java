@@ -167,43 +167,6 @@ public class StoryTest {
         assertEquals("Here's a name _John Doe_ and a food _pizza_ and the name again _John Doe_ " +
                 "and a course _CPSC 210_ and a food again, _pizza_ and the name _John Doe_, end.", story4.createStory());
     }
-/*
-    @Test
-    void testBreakLinesMinLength() {
-        setAnswers();
-        story1.setAnswersInOrder();
-        String s1 = story1.createStory();
-        assertEquals("This is my character, _John Doe_, who is very smar-\nt.", story1.breakLines(s1));
-    }
-
-    @Test
-    void testBreakLinesMidWord() {
-        setAnswers();
-        story2.setAnswersInOrder();
-        String s2 = story2.createStory();
-        assertEquals("I like to eat _pizza_ while _John Doe_ thinks it i-\ns mandatory you do homework for _CPSC "
-                + "210_ before -\nanything else.", story2.breakLines(s2));
-    }
-
-    @Test
-    void testBreakLinesSpace() {
-        setAnswers();
-        story3.setAnswersInOrder();
-        String s3 = story3.createStory();
-        assertEquals("My character's name is _John Doe_. _John Doe_ like-\ns to eat pasta. " +
-                "_John Doe_ also likes to sleep.", story3.breakLines(s3));
-    }
-
-    @Test
-    void testBreakLinesMultipleBreaks() {
-        setAnswers();
-        story4.setAnswersInOrder();
-        String s4 = story4.createStory();
-        assertEquals("Here's a name _John Doe_ and a food _pizza_ and th-\ne name again _John Doe_ " +
-                "and a course _CPSC 210_ an-\nd a food again, _pizza_ and the name _John Doe_, e-\nnd.",
-                story4.breakLines(s4));
-    }
- */
 
     // EFFECTS: changes adds appropriate answers to each story
     void setAnswers() {
