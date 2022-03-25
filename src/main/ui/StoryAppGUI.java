@@ -41,7 +41,7 @@ public class StoryAppGUI extends JFrame {
     // EFFECTS: sets up GUI for initializing app
     public StoryAppGUI() {
         super("Story App");
-        setMinimumSize(new Dimension(1000, 800));
+        setMinimumSize(new Dimension(1050, 800));
         menu = new JComboBox(menuItems);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         createBottomPanel();
@@ -87,8 +87,8 @@ public class StoryAppGUI extends JFrame {
     private void createBottomPanel() {
         bottomPanel = new JPanel();
         input = new JTextField();
-        input.setPreferredSize(new Dimension(500, 30));
-        input.setFont(new Font("Arial", Font.PLAIN, 15));
+        input.setPreferredSize(new Dimension(500, 35));
+        input.setFont(new Font("Arial", Font.PLAIN, 17));
         input.setEditable(true);
         setButtons();
         activePrompt = new JLabel();
@@ -104,10 +104,10 @@ public class StoryAppGUI extends JFrame {
     // MODIFIES: this
     // EFFECTS: sets buttons for app
     private void setButtons() {
-        submit = new JButton("Submit");
-        update = new JButton("Update");
-        submit.setActionCommand("Submit");
-        update.setActionCommand("Update");
+        submit = new JButton("Submit Answer");
+        update = new JButton("Update Answer");
+        submit.setActionCommand("Submit Answer");
+        update.setActionCommand("Update Answer");
     }
 
     // REQUIRES: order of menu items must include all templates first in the same order as in TEMPLATES,
