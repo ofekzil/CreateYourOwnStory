@@ -37,6 +37,9 @@ public class StoryAppGUI extends JFrame {
     private List<Prompt> promptsToRemove;
     private List<Prompt> promptsStory;
 
+    // TODO: add a WindowListener that will determine when a user clicks the red X button to quit and print event
+    //  log then. Also print at the saveStory method
+
     // MODIFIES: this
     // EFFECTS: sets up GUI for initializing app
     public StoryAppGUI() {

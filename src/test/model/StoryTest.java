@@ -103,6 +103,17 @@ public class StoryTest {
     }
 
     @Test
+    void testUpdateAnswer() {
+        setAnswers();
+        story2.updateAnswer(0, "Ben");
+        assertEquals("Ben", story2.getAnswers().get(0).getAnswer());
+        story2.updateAnswer(2, "MATH 105");
+        assertEquals("MATH 105", story2.getAnswers().get(2).getAnswer());
+        story2.updateAnswer(2, "MATH 104");
+        assertEquals("MATH 104", story2.getAnswers().get(2).getAnswer());
+    }
+
+    @Test
     void testSetAnswersInOrderAllInOrder() {
         setAnswers();
         story1.setAnswersInOrder();

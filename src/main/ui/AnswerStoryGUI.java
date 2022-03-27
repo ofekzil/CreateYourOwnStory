@@ -155,8 +155,9 @@ public class AnswerStoryGUI {
             if (index != -1) {
                 answersModel.remove(index);
                 answersModel.add(index, answer);
-                storyAnswers.remove(index);
-                storyAnswers.add(index, new Answer(answer));
+             //   storyAnswers.remove(index);
+             //   storyAnswers.add(index, new Answer(answer));
+                story.updateAnswer(index, answer);
                 storyApp.getInput().setText("");
             }
         }
