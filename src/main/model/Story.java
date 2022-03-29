@@ -30,21 +30,21 @@ public class Story {
         answers = new ArrayList<>();
     }
 
-    // TODO: add calls to logEvent here after classes ae added
-
     // MODIFIES: this, str
     // EFFECTS: turns given string into answer and adds to end of answers
     public void addAnswer(String str) {
         Answer a = new Answer(str);
         answers.add(a);
+        EventLog.getInstance().logEvent(new Event("Submitted Answer: " + str));
     }
 
     // MODIFIES: this
-    // EFFECTS: changes answer at given index to fiven string
+    // EFFECTS: changes answer at given index to given string
     public void updateAnswer(int index, String newAnswer) {
-        Answer curAnswer = answers.get(index);
+        String curAnswer = answers.get(index).getAnswer();
         answers.remove(index);
         answers.add(index, new Answer(newAnswer));
+        EventLog.getInstance().logEvent(new Event("Updated Answer From: " + curAnswer + ", To: " + newAnswer));
     }
 
     // REQUIRES: all prompts have been answered

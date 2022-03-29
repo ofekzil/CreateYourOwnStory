@@ -1,13 +1,17 @@
 package ui;
 
+import model.EventLog;
 import model.Prompt;
 import model.Story;
+import model.Event;
 import persistence.ReadStory;
 import persistence.WriteStory;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,16 +41,14 @@ public class StoryAppGUI extends JFrame {
     private List<Prompt> promptsToRemove;
     private List<Prompt> promptsStory;
 
-    // TODO: add a WindowListener that will determine when a user clicks the red X button to quit and print event
-    //  log then. Also print at the saveStory method
-
     // MODIFIES: this
     // EFFECTS: sets up GUI for initializing app
     public StoryAppGUI() {
         super("Story App");
         setMinimumSize(new Dimension(1050, 800));
         menu = new JComboBox(menuItems);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        addWindowListener(new ExitListener());
+      //  setDefaultCloseOperation(EXIT_ON_CLOSE);
         createBottomPanel();
         listPanel = new JPanel();
         barPanel = new JPanel();
@@ -167,7 +169,15 @@ public class StoryAppGUI extends JFrame {
             JOptionPane.showMessageDialog(null, "Nothing to save here.\nPress OK to quit",
                     "Save & Quit", JOptionPane.PLAIN_MESSAGE);
         }
+        printLog(EventLog.getInstance());
         System.exit(0);
+    }
+
+    // EFFECTS: prints the event log to console
+    private void printLog(EventLog el) {
+        for (Event e : el) {
+            System.out.println(e.toString());
+        }
     }
 
 
@@ -211,6 +221,15 @@ public class StoryAppGUI extends JFrame {
         activePrompt.setText(str);
     }
 
+    // represents a listener for red X button
+    private class ExitListener extends WindowAdapter {
 
+        // EFFECTS: prints event log when user clicks red X button and quits the app
+        @Override
+        public void windowClosing(WindowEvent e) {
+            printLog(EventLog.getInstance());
+            System.exit(0);
+        }
+    }
 
 }

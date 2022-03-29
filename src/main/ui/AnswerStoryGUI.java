@@ -151,7 +151,7 @@ public class AnswerStoryGUI {
         public void actionPerformed(ActionEvent e) {
             String answer = storyApp.getInput().getText();
             int index = answers.getSelectedIndex();
-            List<Answer> storyAnswers = story.getAnswers();
+         //   List<Answer> storyAnswers = story.getAnswers();
             if (index != -1) {
                 answersModel.remove(index);
                 answersModel.add(index, answer);

@@ -29,3 +29,27 @@ available options.
 - As a user, I would like to be able to save my answers to the prompts before finishing answering 
 (i.e. while still in the middle).
 - As a user, I would like to be able to load my answers and continue answering the prompts where I left off.
+
+### Phase 4: Task 2
+Tue Mar 29 13:13:10 PDT 2022 <br />Submitted Answer: gold
+
+Tue Mar 29 13:13:14 PDT 2022 <br />Submitted Answer: month
+
+Tue Mar 29 13:13:18 PDT 2022 <br />Submitted Answer: painter
+
+Tue Mar 29 13:13:22 PDT 2022 <br />Submitted Answer: rage
+
+Tue Mar 29 13:13:28 PDT 2022 <br />Updated Answer From: month, To: year
+
+Tue Mar 29 13:13:32 PDT 2022 <br />Submitted Answer: flu
+
+Tue Mar 29 13:13:40 PDT 2022 <br />Updated Answer From: rage, To: happiness
+
+### Phase 4: Task 3
+
+If I were to refactor my project, I would change the relationship between StoryAppGUI 
+with AnswerStoryGUI and DisplayStoryGUI from a usage one to an inheritance one.
+Meaning, instead of passing a StoryAppGUI object as an argument to AnswerStoryGUI and 
+DisplayStoryGUI, I would have AnswerStoryGUI and DisplayStoryGUI both extend StoryAppGUI.
+That way they'll be able to directly access and use its fields rather than having to 
+use the getters and setters to modify them.
