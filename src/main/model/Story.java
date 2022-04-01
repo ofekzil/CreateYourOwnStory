@@ -38,6 +38,7 @@ public class Story {
         EventLog.getInstance().logEvent(new Event("Submitted Answer: " + str));
     }
 
+    // REQUIRES: 0 <= index < answers.size()
     // MODIFIES: this
     // EFFECTS: changes answer at given index to given string
     public void updateAnswer(int index, String newAnswer) {

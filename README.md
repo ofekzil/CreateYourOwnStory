@@ -52,4 +52,11 @@ with AnswerStoryGUI and DisplayStoryGUI from a usage one to an inheritance one.
 Meaning, instead of passing a StoryAppGUI object as an argument to AnswerStoryGUI and 
 DisplayStoryGUI, I would have AnswerStoryGUI and DisplayStoryGUI both extend StoryAppGUI.
 That way they'll be able to directly access and use its fields rather than having to 
-use the getters and setters to modify them.
+use the getters and setters to modify them.<br />
+Another possible refactoring I could perform is to reduce the number of Story fields 
+in TemplateReader from two to one. After I switched to a GUI from a console 
+UI there was no longer a need for two different Story fields, as only ReadStory 
+extends TemplateReader, and the GUI just uses its reader to access TemplateReader's
+functionality, rather than extending it. It will require me to perform more refactoring and change some 
+usages of the fields across the program. However, it will make maintaining and
+using these fields easier and clearer.

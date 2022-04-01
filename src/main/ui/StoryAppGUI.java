@@ -48,7 +48,6 @@ public class StoryAppGUI extends JFrame {
         setMinimumSize(new Dimension(1050, 800));
         menu = new JComboBox(menuItems);
         addWindowListener(new ExitListener());
-      //  setDefaultCloseOperation(EXIT_ON_CLOSE);
         createBottomPanel();
         listPanel = new JPanel();
         barPanel = new JPanel();
@@ -121,13 +120,7 @@ public class StoryAppGUI extends JFrame {
     // EFFECTS: chooses template/action based on user choice, and sets panels accordingly
     private void choose(int index) {
         try {
-            if (0 <= index && index <= TEMPLATES.length - 1) {
-                clearListPanelAndPromptsToRemove();
-                setStoryAndPrompts(index);
-                barPanel.removeAll();
-                input.setEditable(true);
-                new AnswerStoryGUI(this, story, promptsStory);
-            } else if (index == TEMPLATES.length) {
+            if (0 <= index && index <= TEMPLATES.length) {
                 clearListPanelAndPromptsToRemove();
                 setStoryAndPrompts(index);
                 barPanel.removeAll();

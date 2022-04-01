@@ -1,32 +1,27 @@
 {
-  "name": "data/templates/CrazyMorningMale.txt",
+  "name": "data/templates/KingdomMale.txt",
   "answers": [
-    {"answer": "name2"},
-    {"answer": "band"},
-    {"answer": "product"},
-    {"answer": "company2"},
-    {"answer": "bf gdfgrgrw"},
-    {"answer": "gr dgrg"},
-    {"answer": "eere"},
-    {"answer": "567"},
-    {"answer": "rtrt"}
+    {"answer": "valhalla"},
+    {"answer": "adj"},
+    {"answer": "adj 2.0"},
+    {"answer": "adj3"},
+    {"answer": "name"},
+    {"answer": "gold watch"},
+    {"answer": "year"},
+    {"answer": "job"},
+    {"answer": "emotion"}
   ],
   "prompts": [
-    {"prompt": "Choose a food"},
-    {"prompt": "Choose an animal"},
-    {"prompt": "Now the animal's name"},
-    {"prompt": "Choose a country"},
-    {"prompt": "And another country"},
-    {"prompt": "Name a fast person"},
-    {"prompt": "Name a vehicle"},
-    {"prompt": "Name a kind of building"},
+    {"prompt": "Name a disease"},
     {"prompt": "Choose a number"},
+    {"prompt": "Name a month"},
     {"prompt": "Name a room (e.g. attic, living room)"},
-    {"prompt": "Choose an emotion"},
-    {"prompt": "Name a component of the product above"},
-    {"prompt": "Name a candy"},
-    {"prompt": "Name an adjective"},
-    {"prompt": "And another adjective"},
-    {"prompt": "Choose a bodypart"}
+    {"prompt": "Choose a name for another kingdom"},
+    {"prompt": "Choose a number"},
+    {"prompt": "Name a magical creature"},
+    {"prompt": "Name a kind of tree"},
+    {"prompt": "Name a fruit (in plural)"},
+    {"prompt": "Name a body part"},
+    {"prompt": "Choose a colour"}
   ]
 }
