@@ -46,12 +46,12 @@ public class ReadStory extends TemplateReader {
     // EFFECTS: builds the story from given sources; throws FileNotFound exception if template file doesn't exist
     private Story buildStory(JSONObject jo) throws FileNotFoundException {
         String name = jo.getString("name");
-        readTemplateFile(name, false);
+        readTemplateFile(name);
         List<Prompt> prompts = addPrompts(jo);
         List<Answer> answers = addAnswers(jo);
-        storyToRead.setPrompts(prompts);
-        storyToRead.setAnswers(answers);
-        return storyToRead;
+        story.setPrompts(prompts);
+        story.setAnswers(answers);
+        return story;
     }
 
     // EFFECTS: creates a list of prompts from jo

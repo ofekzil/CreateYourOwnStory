@@ -13,8 +13,7 @@ import java.util.Scanner;
 // represents a class to read a story template from txt file
 public abstract class TemplateReader {
 
-    protected Story storyToApp;
-    protected Story storyToRead;
+    protected Story story;
 
     // REQUIRES: txt file must have the text in the following order: first the name of the relative path,
     // then all prompts (each on new line), then all locations (as ints in a single line), then the rest of
@@ -22,7 +21,7 @@ public abstract class TemplateReader {
     // MODIFIES: this
     // EFFECTS: read story from txt file and sort information into appropriate lists, then determines whether to assign
     // them to storyToApp or storyToRead. Throws FileNotFound exception if it can't find txt file
-    public void readTemplateFile(String name, boolean state) throws FileNotFoundException {
+    public void readTemplateFile(String name) throws FileNotFoundException {
 
         File file = new File(name);
         Scanner sc = new Scanner(file);
@@ -43,18 +42,7 @@ public abstract class TemplateReader {
         sc.close();
         skeleton.remove(skeleton.get(0));
         List<Prompt> prompts = turnToPrompts(promptsString);
-        determineState(state, fileName, locations, skeleton, prompts);
-    }
-
-    // MODIFIES: this
-    // EFFECTS: determines whether to assign story to app or read; true = app, false = read
-    private void determineState(boolean state, String fileName, List<Integer> locations,
-                                List<String> skeleton, List<Prompt> prompts) {
-        if (state) {
-            storyToApp = new Story(fileName, skeleton, prompts, locations);
-        } else {
-            storyToRead = new Story(fileName, skeleton, prompts, locations);
-        }
+        story = new Story(fileName, skeleton, prompts, locations);
     }
 
     // EFFECTS: turns list of strings from file into prompts
@@ -79,11 +67,7 @@ public abstract class TemplateReader {
 
     // getters
 
-    public Story getStoryToApp() {
-        return storyToApp;
-    }
-
-    public Story getStoryToRead() {
-        return storyToRead;
+    public Story getStory() {
+        return story;
     }
 }

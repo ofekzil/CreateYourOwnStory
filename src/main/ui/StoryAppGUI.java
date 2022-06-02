@@ -143,8 +143,8 @@ public class StoryAppGUI extends JFrame {
         if (index == TEMPLATES.length) {
             story = reader.read();
         } else {
-            reader.readTemplateFile(TEMPLATES[index], true);
-            story = reader.getStoryToApp();
+            reader.readTemplateFile(TEMPLATES[index]);
+            story = reader.getStory();
         }
         promptsStory = story.getPrompts();
     }

@@ -26,22 +26,4 @@ public class PromptTest {
         assertEquals("Choose a food", p2);
     }
 
-    @Test
-    void testChangePromptToAnswer() {
-        assertEquals("Choose a name", testPrompt.getPrompt());
-        testPrompt.changePromptToAnswer("John Doe");
-        assertEquals("John Doe", testPrompt.getPrompt());
-        testPrompt.changePromptToAnswer("Mike"); //would ideally change answer only once,
-        assertEquals("Mike", testPrompt.getPrompt()); //but for test's sake did twice
-    }
-
-    @Test
-    void testAnotherChangePromptToAnswer() {
-        assertEquals("Choose a food", anotherTestPrompt.getPrompt());
-        anotherTestPrompt.changePromptToAnswer("pizza");
-        assertEquals("pizza", anotherTestPrompt.getPrompt());
-        anotherTestPrompt.changePromptToAnswer("pasta");
-        assertEquals("pasta", anotherTestPrompt.getPrompt());
-    }
-
 }

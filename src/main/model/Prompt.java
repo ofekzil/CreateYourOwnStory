@@ -10,13 +10,6 @@ public class Prompt {
         this.prompt = prompt;
     }
 
-    // MODIFIES: this
-    // EFFECTS: replaces the prompt with the appropriate answer
-    public void changePromptToAnswer(String answer) {
-        prompt = answer;
-    }
-
-
     // getters
 
     public String getPrompt() {

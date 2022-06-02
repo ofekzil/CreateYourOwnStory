@@ -17,7 +17,7 @@ public class ReadStoryTest extends StoryJsonTest {
     @Test
     void testReadTemplateFileNonExistent() {
         try {
-            readTemplateFile("data/nonExistentFile.txt", false);
+            readTemplateFile("data/nonExistentFile.txt");
             fail("expected file not found exception");
         } catch (FileNotFoundException e) {
             // expected
@@ -25,28 +25,14 @@ public class ReadStoryTest extends StoryJsonTest {
     }
 
     @Test
-    void testReadTemplateFileExistsToRead() {
+    void testReadTemplateFileExists() {
         try {
-            readTemplateFile("data/testTemplate.txt", false);
-            assertEquals("data/testTemplate.txt", storyToRead.getName());
-            checkSkeleton(getStoryToRead().getSkeleton());
-            checkLocations(storyToRead.getLocations());
-            checkPrompts(storyToRead.getPrompts(), 0);
-            assertTrue(storyToRead.getAnswers().isEmpty());
-        } catch (FileNotFoundException e) {
-            fail("caught file not found exception");
-        }
-    }
-
-    @Test
-    void testReadTemplateFileExistsToApp() {
-        try {
-            readTemplateFile("data/testTemplate.txt", true);
-            assertEquals("data/testTemplate.txt", storyToApp.getName());
-            checkSkeleton(getStoryToApp().getSkeleton());
-            checkLocations(storyToApp.getLocations());
-            checkPrompts(storyToApp.getPrompts(), 0);
-            assertTrue(storyToApp.getAnswers().isEmpty());
+            readTemplateFile("data/testTemplate.txt");
+            assertEquals("data/testTemplate.txt", story.getName());
+            checkSkeleton(getStory().getSkeleton());
+            checkLocations(story.getLocations());
+            checkPrompts(story.getPrompts(), 0);
+            assertTrue(story.getAnswers().isEmpty());
         } catch (FileNotFoundException e) {
             fail("caught file not found exception");
         }

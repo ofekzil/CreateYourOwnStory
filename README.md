@@ -1,4 +1,3 @@
-# My Personal Project - CPSC 210
 
 ## Create Your Own Story
 
@@ -8,7 +7,7 @@ story for each user. Every time, the user will select one of few basic story tem
 that correlate to that story template. Then, after recording the answers to these prompts, 
 the user will be able to read the full story with their answers filling gaps in the story.    
 There are many people who will find the application interesting and useful, as 
-its main purpose is *entertainment!* Therefore, anybody who is looking to get a little 
+its main purpose is entertainment! Therefore, anybody who is looking to get a little 
 creative, wanting to write a story they can make unique to themselves, will find the 
 application of good use.
 
@@ -60,3 +59,5 @@ extends TemplateReader, and the GUI just uses its reader to access TemplateReade
 functionality, rather than extending it. It will require me to perform more refactoring and change some 
 usages of the fields across the program. However, it will make maintaining and
 using these fields easier and clearer.
+
+NOTE: This application was developed as part of the term project for CPSC 210 - Software Construction at UBC.

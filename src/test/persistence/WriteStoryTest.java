@@ -23,7 +23,7 @@ public class WriteStoryTest extends StoryJsonTest {
     @BeforeEach
     void setStory() {
         try {
-            readTemplateFile("data/testTemplate.txt", true);
+            readTemplateFile("data/testTemplate.txt");
         } catch (FileNotFoundException e) {
             fail("file should exist");
         }
@@ -33,7 +33,7 @@ public class WriteStoryTest extends StoryJsonTest {
     void testWriteNonExistentFile() {
         try {
             writer = new WriteStory("data/JSONtests/nonExistentFile\n.json");
-            writer.write(storyToApp);
+            writer.write(story);
             fail("Should catch file not found exception");
         } catch (IOException e) {
             // expected
@@ -44,7 +44,7 @@ public class WriteStoryTest extends StoryJsonTest {
     void testWriteNoAnswers() {
         try {
             writer = new WriteStory("data/JSONtests/testWriteStoryNoAnswers.json");
-            writer.write(storyToApp);
+            writer.write(story);
 
             reader = new ReadStory("data/JSONtests/testWriteStoryNoAnswers.json");
             Story str = reader.read();
@@ -63,10 +63,10 @@ public class WriteStoryTest extends StoryJsonTest {
         try {
             List<Prompt> prompts = turnToPrompts(Arrays.asList("Choose a course", "Choose an animal"));
             List<Answer> answers = turnToAnswers(Arrays.asList("John Doe", "pizza"));
-            storyToApp.setPrompts(prompts);
-            storyToApp.setAnswers(answers);
+            story.setPrompts(prompts);
+            story.setAnswers(answers);
             writer = new WriteStory("data/JSONtests/testWriteStorySomeAnswers.json");
-            writer.write(storyToApp);
+            writer.write(story);
 
             reader = new ReadStory("data/JSONtests/testWriteStorySomeAnswers.json");
             Story str = reader.read();
@@ -85,10 +85,10 @@ public class WriteStoryTest extends StoryJsonTest {
         try {
             List<Prompt> prompts = new ArrayList<>();
             List<Answer> answers = turnToAnswers(Arrays.asList("John Doe", "pizza", "CPSC 210", "dog"));
-            storyToApp.setPrompts(prompts);
-            storyToApp.setAnswers(answers);
+            story.setPrompts(prompts);
+            story.setAnswers(answers);
             writer = new WriteStory("data/JSONtests/testWriteStoryAllAnswers.json");
-            writer.write(storyToApp);
+            writer.write(story);
 
             reader = new ReadStory("data/JSONtests/testWriteStoryAllAnswers.json");
             Story str = reader.read();

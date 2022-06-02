@@ -1,27 +1,26 @@
 {
   "name": "data/templates/KingdomMale.txt",
   "answers": [
-    {"answer": "valhalla"},
-    {"answer": "adj"},
-    {"answer": "adj 2.0"},
-    {"answer": "adj3"},
-    {"answer": "name"},
+    {"answer": "far away land"},
+    {"answer": "small"},
+    {"answer": "smart"},
+    {"answer": "young"},
+    {"answer": "Arthur"},
     {"answer": "gold watch"},
-    {"answer": "year"},
-    {"answer": "job"},
-    {"answer": "emotion"}
+    {"answer": "minute"},
+    {"answer": "painter"},
+    {"answer": "sadness"},
+    {"answer": "polio"},
+    {"answer": "23"},
+    {"answer": "August"},
+    {"answer": "attic"},
+    {"answer": "another kingdom"},
+    {"answer": "789"},
+    {"answer": "dragon"},
+    {"answer": "ash"},
+    {"answer": "plums"},
+    {"answer": "feet"},
+    {"answer": "yellow"}
   ],
-  "prompts": [
-    {"prompt": "Name a disease"},
-    {"prompt": "Choose a number"},
-    {"prompt": "Name a month"},
-    {"prompt": "Name a room (e.g. attic, living room)"},
-    {"prompt": "Choose a name for another kingdom"},
-    {"prompt": "Choose a number"},
-    {"prompt": "Name a magical creature"},
-    {"prompt": "Name a kind of tree"},
-    {"prompt": "Name a fruit (in plural)"},
-    {"prompt": "Name a body part"},
-    {"prompt": "Choose a colour"}
-  ]
+  "prompts": []
 }
